@@ -208,23 +208,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/nath/.nuget/packages/": {},
-    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
+    "C:\\Users\\Catbox\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/nath/Workspace/dev/yoda-services/src/Yoda.Services/Yoda.Services.csproj",
+      "projectUniqueName": "D:\\vscode\\day3\\yoda-services\\src\\Yoda.Services\\Yoda.Services.csproj",
       "projectName": "Yoda.Services",
-      "projectPath": "/Users/nath/Workspace/dev/yoda-services/src/Yoda.Services/Yoda.Services.csproj",
-      "packagesPath": "/Users/nath/.nuget/packages/",
-      "outputPath": "/Users/nath/Workspace/dev/yoda-services/src/Yoda.Services/obj/",
+      "projectPath": "D:\\vscode\\day3\\yoda-services\\src\\Yoda.Services\\Yoda.Services.csproj",
+      "packagesPath": "C:\\Users\\Catbox\\.nuget\\packages\\",
+      "outputPath": "D:\\vscode\\day3\\yoda-services\\src\\Yoda.Services\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "/Users/nath/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Catbox\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -271,7 +267,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.203/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
       }
     }
   }
