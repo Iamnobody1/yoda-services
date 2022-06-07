@@ -1,25 +1,26 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Yoda.Services.Controllers;
-
-[ApiController]
-[Route("[controller]")]
-public class AuthenticationController : ControllerBase
+namespace Yoda.Services.Controllers
 {
-    [EnableCors("AnotherPolicy")]
-    [HttpGet]
-    public string Authentication(string Username, string Password)
+    [ApiController]
+    [Route("[controller]")]
+    public class AuthenticationController : ControllerBase
     {
-        if (Username == "Fluke" && Password == "12345") {
-            return StatusCode(StatusCodes.Status200InternalServerError);
-         }
+        [HttpGet]
+        public string Authentication(string Username, string Password)
+        {
+            Hello1();
+            string 
+            return "";
+            // if (Username == "Fluke" && Password == "12345")
+            // {
+            //     return StatusCode(StatusCodes.Status200InternalServerError);
+            // }
+            // else
+            // {
 
-        else{
-            
-            return StatusCode(StatusCodes.Status500InternalServerError);
-         }
-
-
-
+            //     return StatusCode(StatusCodes.Status500InternalServerError);
+            // }
+        }
     }
 }
