@@ -6,14 +6,17 @@ namespace Yoda.Services.Controllers;
 [Route("[controller]")]
 public class AuthenticationController : ControllerBase
 {
+    [EnableCors("AnotherPolicy")]
+    [HttpGet]
     public string Authentication(string Username, string Password)
     {
         if (Username == "Fluke" && Password == "12345") {
-            return"200";
+            return StatusCode(StatusCodes.Status200InternalServerError);
          }
 
         else{
-            return"401";
+            
+            return StatusCode(StatusCodes.Status500InternalServerError);
          }
 
 

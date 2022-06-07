@@ -1,3 +1,5 @@
+using Microsoft.Net.Http.Headers;
+
 var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,10 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowSpecificOrigins,
-                      policy  =>
+                      policy =>
                       {
                           policy.WithOrigins("http://example.com",
-                                              "http://www.contoso.com");
+                                              "http://www.contoso.com").SetIsOriginAllowedToAllowWildcardSubdomains();;
                       });
 });
 
@@ -31,10 +33,27 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors(MyAllowSpecificOrigins);
+app.UseCors();
 
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapGet("/echo",
+        context => context.Response.WriteAsync("echo"))
+        .RequireCors(MyAllowSpecificOrigins);
+
+    endpoints.MapControllers()
+             .RequireCors(MyAllowSpecificOrigins);
+
+    endpoints.MapGet("/echo2",
+        context => context.Response.WriteAsync("echo2"));
+
+    endpoints.MapRazorPages();
+});
+
+
 
 app.Run();
