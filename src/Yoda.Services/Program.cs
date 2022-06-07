@@ -3,12 +3,12 @@ using Yoda.Services.Services.User;
 
 var builder = WebApplication.CreateBuilder(args);
 var allowedHosts = builder.Configuration["AllowedHosts"];
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+var allowedSpecificOrigins = "AllowedSpecificOrigins";
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(MyAllowSpecificOrigins,
+    options.AddPolicy(allowedSpecificOrigins,
     policy =>
     {
         policy
@@ -28,9 +28,9 @@ if (!app.Environment.IsProduction())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-//app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthorization();
 app.MapControllers();
-app.UseCors(MyAllowSpecificOrigins);
+app.UseCors(allowedSpecificOrigins);
 app.Run();
