@@ -2,20 +2,20 @@ using Yoda.Services.Services.Authentication;
 using Yoda.Services.Services.User;
 
 var builder = WebApplication.CreateBuilder(args);
-var allowedHosts = builder.Configuration["AllowedHosts"];
-var allowedSpecificOrigins = "AllowedSpecificOrigins";
+var allowedOrigins = builder.Configuration["AllowedOrigins"];
+Console.WriteLine("allowedSpecificOrigins: " + allowedOrigins);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(allowedSpecificOrigins,
-    policy =>
-    {
-        policy
-            .WithOrigins("http://localhost:3000")
-            .AllowAnyHeader()
-            .AllowAnyMethod();
-    }
+    options.AddPolicy(
+        nameof(allowedOrigins),
+        policy =>
+        {
+            policy.WithOrigins(allowedOrigins.Split(';'))
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        }
     );
 });
 builder.Services.AddSwaggerGen();
@@ -32,5 +32,5 @@ app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthorization();
 app.MapControllers();
-app.UseCors(allowedSpecificOrigins);
+app.UseCors(nameof(allowedOrigins));
 app.Run();
