@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using Yoda.Services.Models;
+using Yoda.Services.Services.Authentication;
 
 namespace Yoda.Services.Controllers
 {
@@ -6,21 +8,20 @@ namespace Yoda.Services.Controllers
     [Route("[controller]")]
     public class AuthenticationController : ControllerBase
     {
-        [HttpGet]
-        public string Authentication(string Username, string Password)
-        {
-            Hello1();
-            string 
-            return "";
-            // if (Username == "Fluke" && Password == "12345")
-            // {
-            //     return StatusCode(StatusCodes.Status200InternalServerError);
-            // }
-            // else
-            // {
+        private readonly ILoginService LoginService;
 
-            //     return StatusCode(StatusCodes.Status500InternalServerError);
-            // }
+        public AuthenticationController(ILoginService loginService)
+        {
+            LoginService = loginService;
+        }
+
+        [HttpPost]
+        public IActionResult Post([FromBody] LoginModel login)
+        {
+            var result = LoginService.IsExist(login.UserName, login.Password);
+            if (result == null || result == Guid.Empty)
+                return Unauthorized();
+            return Ok(result);
         }
     }
 }
