@@ -1,6 +1,6 @@
 namespace Yoda.Services.Models
 {
-    public class UserModel
+    public class RegisterModel
     {
         public Guid ID { get; set; }
         public string Username { get; set; }

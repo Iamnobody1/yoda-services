@@ -33,4 +33,5 @@ app.UseRouting();
 app.UseAuthorization();
 app.MapControllers();
 app.UseCors(nameof(allowedOrigins));
+app.UseDeveloperExceptionPage();
 app.Run();
