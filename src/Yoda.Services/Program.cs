@@ -1,4 +1,5 @@
 using Yoda.Services.Services.Authentication;
+
 using Yoda.Services.Services.User;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,12 +23,14 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<ILoginService, LoginService>();
 builder.Services.AddTransient<IUserService, UserService>();
 
+
 var app = builder.Build();
 if (!app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseDeveloperExceptionPage();
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthorization();

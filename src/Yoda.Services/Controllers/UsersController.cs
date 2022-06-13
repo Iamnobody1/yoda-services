@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Yoda.Services.Models;
 using Yoda.Services.Services.User;
 
 namespace Yoda.Services.Controllers;
@@ -22,4 +23,11 @@ public class UsersController : ControllerBase
             return NotFound();
         return Ok(result);
     }
+
+    [HttpPost]
+    public IActionResult Get([FromBody] RegisterModel register)
+    {
+            var result = UserService.Create(register);
+            return Ok(result);
+        }
 }
