@@ -18,7 +18,7 @@ namespace Yoda.Services.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] LoginModel login)
         {
-            var result = LoginService.IsExist(login.UserName, login.Password);
+            var result = LoginService.IsExist(login.Username, login.Password);
             if (result == null || result == Guid.Empty)
                 return Unauthorized();
             return Ok(result);

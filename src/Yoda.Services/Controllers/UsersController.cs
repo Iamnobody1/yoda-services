@@ -18,16 +18,24 @@ public class UsersController : ControllerBase
     [HttpGet("{userId}")]
     public IActionResult Get([FromRoute] Guid userId)
     {
-        var result = UserService.GetUserById(userId);
+        var result = UserService.GetByID(userId);
         if (result == null)
             return NotFound();
         return Ok(result);
     }
 
-    [HttpPost]
-    public IActionResult Get([FromBody] RegisterModel register)
+
+    [HttpPost()]
+    public IActionResult Post([FromBody] RegisterModel register)
     {
-            var result = UserService.Create(register);
-            return Ok(result);
-        }
+        var result = UserService.Create(register);
+        return Ok(result);
+    }
+
+    [HttpPut("{userId}")]
+    public IActionResult Put([FromRoute] Guid userId, [FromBody] RegisterModel register)
+    {
+        UserService.Update(userId, register);
+        return Ok();
+    }
 }
