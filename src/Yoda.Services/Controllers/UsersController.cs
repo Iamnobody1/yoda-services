@@ -23,11 +23,18 @@ public class UsersController : ControllerBase
             return NotFound();
         return Ok(result);
     }
-    
+
     [HttpPost()]
     public IActionResult Post([FromBody] RegisterModel register)
     {
         var result = UserService.Create(register);
         return Ok(result);
+    }
+
+    [HttpPut("{userId}")]
+    public IActionResult Put([FromRoute] Guid userId, [FromBody] RegisterModel register)
+    {
+        UserService.Update(userId, register);
+        return Ok();
     }
 }

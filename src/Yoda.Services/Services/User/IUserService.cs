@@ -6,5 +6,6 @@ namespace Yoda.Services.Services.User
     {
         UserModel GetByID(Guid userId);
         Guid Create(RegisterModel register);
+        void Update(Guid userId, RegisterModel register);
     }
 }
