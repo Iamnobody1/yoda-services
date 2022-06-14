@@ -30,4 +30,11 @@ public class UsersController : ControllerBase
         var result = UserService.Create(register);
         return Ok(result);
     }
+
+    [HttpPut("{userId}")]
+    public IActionResult Put([FromRoute] Guid userId, [FromBody] RegisterModel register)
+    {
+        UserService.Update(userId, register);
+        return Ok();
+    }
 }
