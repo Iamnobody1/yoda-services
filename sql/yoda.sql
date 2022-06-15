@@ -4,5 +4,5 @@ CREATE TABLE public."Users" (
     "Password" varchar(12) NULL,
     "DisplayName" varchar(10) NULL,
     "Avatar" varchar(256) NULL,
-    CONSTRAINT "Users_PK" PRIMARY KEY ("ID")
+    CONSTRAINT "Users_ID_PK" PRIMARY KEY ("ID")
 );
