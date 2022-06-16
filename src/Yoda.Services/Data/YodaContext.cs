@@ -11,5 +11,4 @@ public class YodaContext : DbContext
 
     public DbSet<UserEntity> Users { get; set; }
     public DbSet<OrderEntity> Orders { get; set; }
-    public DbSet<OrderEntity> Cats { get; set; }
 }

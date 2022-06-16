@@ -7,7 +7,7 @@ using Yoda.Services.Services.User;
 namespace Yoda.Services.Controllers;
 
 [ApiController]
-[Route("[controller]")] 
+[Route("[controller]")]
 public class OrdersController : ControllerBase
 {
     private readonly IOrderService OrderService;
@@ -26,10 +26,10 @@ public class OrdersController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("{userId}")]
+    [HttpGet("{orderId}")]
     public IActionResult Get([FromRoute] int orderId)
     {
-        var result = OrderService.GetByID(orderId);
+        var result = OrderService.GetById(orderId);
         if (result == null)
             return NotFound();
         return Ok(result);

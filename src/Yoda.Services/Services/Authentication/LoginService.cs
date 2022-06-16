@@ -16,7 +16,7 @@ namespace Yoda.Services.Services.Authentication
             var user = _yodaContext.Users.FirstOrDefault(s => s.Username == username && s.Password == password);
             if (user == null)
                 return null;
-            return Guid.Parse(user.ID);
+            return Guid.Parse(user.Id);
         }
     }
 }

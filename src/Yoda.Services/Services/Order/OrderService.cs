@@ -26,9 +26,9 @@ public class OrderService : IOrderService
         return items;
     }
 
-    public OrderModel GetByID(int orderID)
+    public OrderModel GetById(int orderId)
     {
-        var item = _yodaContext.Orders.FirstOrDefault(x => x.Id == orderID);
+        var item = _yodaContext.Orders.FirstOrDefault(x => x.Id == orderId);
         if (item == null)
             return null;
         return new OrderModel()
@@ -43,7 +43,7 @@ public class OrderService : IOrderService
     {
         var order = new OrderEntity();
         order.CustomerId = newOrder.CustomerId;
-        order.CreateDateUTC = new DateTimeOffset(DateTime.Now);
+        order.CreateDateUTC = new DateTimeOffset(DateTime.Now).ToUniversalTime();
         _yodaContext.Orders.Add(order);
         _yodaContext.SaveChanges();
         return order.Id;
@@ -55,7 +55,6 @@ public class OrderService : IOrderService
         if (order != null)
         {
             order.CustomerId = newOrder.CustomerId;
-            order.CreateDateUTC = newOrder.CreateDateUTC;
             _yodaContext.Orders.Update(order);
             _yodaContext.SaveChanges();
         }

@@ -18,7 +18,7 @@ public class UsersController : ControllerBase
     [HttpGet("{userId}")]
     public IActionResult Get([FromRoute] Guid userId)
     {
-        var result = UserService.GetByID(userId);
+        var result = UserService.GetById(userId);
         if (result == null)
             return NotFound();
         return Ok(result);

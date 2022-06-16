@@ -4,7 +4,7 @@ namespace Yoda.Services.Services.User
 {
     public interface IUserService
     {
-        UserModel GetByID(Guid userId);
+        UserModel GetById(Guid userId);
         Guid Create(RegisterModel register);
         void Update(Guid userId, RegisterModel register);
     }
