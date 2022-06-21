@@ -1,40 +1,31 @@
+using Yoda.Service2.Data;
 using Microsoft.EntityFrameworkCore;
-using Yoda.Services.Data;
-using Yoda.Services.Services.Authentication;
-using Yoda.Services.Services.User;
+using Yoda.Service2.Services.Product;
 
 var builder = WebApplication.CreateBuilder(args);
-var allowedOrigins = builder.Configuration["AllowedOrigins"];
-Console.WriteLine("allowedSpecificOrigins: " + allowedOrigins);
+
+// Add services to the container.
+
 builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(
-        nameof(allowedOrigins),
-        policy =>
-        {
-            policy.WithOrigins(allowedOrigins.Split(';'))
-                  .AllowAnyHeader()
-                  .AllowAnyMethod();
-        }
-    );
-});
 builder.Services.AddSwaggerGen();
-builder.Services.AddTransient<ILoginService, LoginService>();
-builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddDbContext<YodaContext>(options => options.UseNpgsql("Host=localhost;Port=5432;Database=yoda;Username=postgres;Password=postgres;"));
 
 var app = builder.Build();
-if (!app.Environment.IsProduction())
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 app.UseHttpsRedirection();
-app.UseRouting();
+
 app.UseAuthorization();
+
 app.MapControllers();
-app.UseCors(nameof(allowedOrigins));
-app.UseDeveloperExceptionPage();
+
 app.Run();

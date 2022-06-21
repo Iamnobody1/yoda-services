@@ -1,13 +1,14 @@
 using Microsoft.EntityFrameworkCore;
-using Yoda.Services.Entities;
+using Yoda.Service2.Entities;
 
-namespace Yoda.Services.Data;
-
-public class YodaContext : DbContext
+namespace Yoda.Service2.Data
 {
-    public YodaContext(DbContextOptions options) : base(options)
-    {
-    }
 
-    public DbSet<UserEntity> Users { get; set; }
+    public class YodaContext : DbContext
+    {
+        public YodaContext(DbContextOptions<YodaContext> options) : base(options)
+        {
+        }
+        public DbSet<ProductEntity> Products { get; set; }
+    }
 }
