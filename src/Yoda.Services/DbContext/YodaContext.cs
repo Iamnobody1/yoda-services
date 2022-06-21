@@ -13,6 +13,7 @@ public class YodaContext : DbContext
     public DbSet<OrderEntity>? Orders { get; set; }
     public DbSet<OrderDetailEntity> OrderDetails { get; set; }
     public DbSet<CustomerEntity> Customers { get; set; }
+    public DbSet<ProductEntity> Products { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
