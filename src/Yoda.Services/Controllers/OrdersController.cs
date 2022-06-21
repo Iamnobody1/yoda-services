@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using Yoda.Services.Entities;
 using Yoda.Services.Models;
 using Yoda.Services.Services.Order;
-using Yoda.Services.Services.User;
 
 namespace Yoda.Services.Controllers;
 
