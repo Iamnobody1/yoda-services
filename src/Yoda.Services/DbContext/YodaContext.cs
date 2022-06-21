@@ -9,7 +9,6 @@ public class YodaContext : DbContext
     {
     }
 
-    public DbSet<UserEntity> Users { get; set; }
     public DbSet<OrderEntity>? Orders { get; set; }
     public DbSet<OrderDetailEntity> OrderDetails { get; set; }
     public DbSet<CustomerEntity> Customers { get; set; }
@@ -19,5 +18,7 @@ public class YodaContext : DbContext
     {
         modelBuilder.Entity<OrderEntity>().ToTable("Order");
         modelBuilder.Entity<OrderDetailEntity>().ToTable("OrderDetail");
+        modelBuilder.Entity<ProductEntity>().ToTable("Product");
+        modelBuilder.Entity<CustomerEntity>().ToTable("Customer");
     }
 }
