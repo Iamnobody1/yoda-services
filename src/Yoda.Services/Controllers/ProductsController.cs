@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using Yoda.Service2.Models;
-using Yoda.Service2.Services.Product;
+using Yoda.Services.Models;
+using Yoda.Services.Services.Product;
 
-namespace Yoda.Service2.Controllers;
+namespace Yoda.Services.Controllers;
 
 [ApiController]
 [Route("[controller]")]
