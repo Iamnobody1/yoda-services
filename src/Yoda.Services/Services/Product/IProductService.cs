@@ -1,7 +1,7 @@
-using Yoda.Service2.Entities;
-using Yoda.Service2.Models;
+using Yoda.Services.Entities;
+using Yoda.Services.Models;
 
-namespace Yoda.Service2.Services.Product
+namespace Yoda.Services.Services.Product
 {
     public interface IProductService
     {

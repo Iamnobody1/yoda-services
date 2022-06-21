@@ -1,12 +1,9 @@
-using Yoda.Service2.Data;
 using Microsoft.EntityFrameworkCore;
+using Yoda.Services.Services.Product;
 using Yoda.Services.Data;
-using Yoda.Services.Services.Authentication;
+using Yoda.Services.Services.Customer;
 using Yoda.Services.Services.Order;
 using Yoda.Services.Services.OrderDetailsService;
-using Yoda.Services.Services.Customer;
-using Yoda.Services.Services.User;
-using Yoda.Service2.Services.Product;
 
 var builder = WebApplication.CreateBuilder(args);
 var allowedOrigins = builder.Configuration["AllowedOrigins"];
