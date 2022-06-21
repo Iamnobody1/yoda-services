@@ -11,9 +11,11 @@ public class YodaContext : DbContext
 
     public DbSet<UserEntity> Users { get; set; }
     public DbSet<OrderEntity>? Orders { get; set; }
+    public DbSet<OrderDetailEntity> OrderDetails { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<OrderEntity>().ToTable("Order");
+        modelBuilder.Entity<OrderDetailEntity>().ToTable("OrderDetail");
     }
 }

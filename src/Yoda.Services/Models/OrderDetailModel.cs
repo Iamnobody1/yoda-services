@@ -1,6 +1,6 @@
-namespace Yoda.Services.Entities
+namespace Yoda.Services.Models
 {
-    public class OrderDetailEntity
+    public class OrderDetailModel
     {
         public int Id { get; set; }
         public int OrderId { get; set; }

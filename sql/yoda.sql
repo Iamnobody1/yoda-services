@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 CREATE TABLE public."Users" (
 	"Id" varchar(36) NOT NULL,
 	"Username" varchar(256) NULL,
@@ -52,3 +53,13 @@ values (1, 1, '2016-01-01 10:00:00');
 
 insert INTO public."OrderDetail" ("Id", "OrderId", "ProductId", "Quantity" ,"UnitPrice")
 values (1, 1, 4, 1, 14000);
+=======
+CREATE TABLE public."Users" (
+	"ID" varchar(36) NOT NULL,
+	"Username" varchar(256) NULL,
+	"Password" varchar(12) NULL,
+	"DisplayName" varchar(10) NULL,
+	"Avatar" varchar(256) NULL,
+	CONSTRAINT "Users_ID_PK" PRIMARY KEY ("ID")
+);
+>>>>>>> demo/best2
