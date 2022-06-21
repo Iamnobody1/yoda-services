@@ -3,6 +3,7 @@ using Yoda.Services.Data;
 using Yoda.Services.Services.Authentication;
 using Yoda.Services.Services.Order;
 using Yoda.Services.Services.OrderDetailsService;
+using Yoda.Services.Services.Customer;
 using Yoda.Services.Services.User;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +24,7 @@ builder.Services.AddCors(options =>
     );
 });
 builder.Services.AddSwaggerGen();
+builder.Services.AddTransient<ICustomerService, CustomerService>();
 builder.Services.AddTransient<ILoginService, LoginService>();
 builder.Services.AddTransient<IOrderService, OrderService>();
 builder.Services.AddTransient<IUserService, UserService>();
@@ -43,6 +45,7 @@ if (!app.Environment.IsProduction())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseDeveloperExceptionPage();
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthorization();

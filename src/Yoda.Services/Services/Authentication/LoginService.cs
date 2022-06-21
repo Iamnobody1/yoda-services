@@ -13,6 +13,7 @@ namespace Yoda.Services.Services.Authentication
 
         public Guid? IsExist(string username, string password)
         {
+
             var user = _yodaContext.Users.FirstOrDefault(s => s.Username == username && s.Password == password);
             if (user == null)
                 return null;

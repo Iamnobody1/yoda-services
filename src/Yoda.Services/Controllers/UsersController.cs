@@ -24,6 +24,7 @@ public class UsersController : ControllerBase
         return Ok(result);
     }
 
+
     [HttpPost()]
     public IActionResult Post([FromBody] RegisterModel register)
     {

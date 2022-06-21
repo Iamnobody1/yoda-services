@@ -6,4 +6,3 @@ namespace Yoda.Services.Entities
         public string Name { get; set; }
     }
 }
-
