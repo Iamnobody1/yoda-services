@@ -5,5 +5,8 @@ namespace Yoda.Services.Entities
         public int Id { get; set; }
         public int CustomerId { get; set; }
         public DateTimeOffset CreateDateUTC { get; set; }
+
+        public CustomerEntity Customer { get; set; }
+        public OrderDetailEntity OrderDetail { get; set; }
     }
 }

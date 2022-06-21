@@ -1,4 +1,3 @@
-using Yoda.Services.Entities;
 using Yoda.Services.Models;
 
 namespace Yoda.Services.Services.Product
