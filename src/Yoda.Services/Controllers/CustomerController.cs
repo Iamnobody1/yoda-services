@@ -15,22 +15,23 @@ public class CustomersController : ControllerBase
         CustomerService = customerService;
     }
 
-    [HttpGet()]
-    public IActionResult Get([FromQuery] int start, [FromQuery] int lenght)
+    [HttpGet]
+    public IActionResult Get([FromQuery] int start, [FromQuery] int length)
     {
-        CustomerService.GetList(start, lenght);
-        return Ok();
-    }
-
-    [HttpGet("{Id}")]
-    public IActionResult Get([FromRoute] int customerId)
-    {
-        var result = CustomerService.GetByID(customerId);
+        var result = CustomerService.GetList(start, length);
         if (result == null)
             return NotFound();
         return Ok(result);
     }
 
+    [HttpGet("{customerId}")]
+    public IActionResult Get([FromRoute] int customerId)
+    {
+        var result = CustomerService.GetById(customerId);
+        if (result == null)
+            return NotFound();
+        return Ok(result);
+    }
 
     [HttpPost]
     public IActionResult Post([FromBody] CustomerModel customer)
@@ -39,18 +40,18 @@ public class CustomersController : ControllerBase
         return Ok(result);
     }
 
-    [HttpPut("{userId}")]
+    [HttpPut("{customerId}")]
     public IActionResult Put([FromRoute] int customerId, [FromBody] CustomerEntity customer)
     {
         CustomerService.Update(customerId, customer);
         return Ok();
     }
 
-    [HttpDelete("{userId}")]
+    [HttpDelete("{customerId}")]
     public IActionResult Delete([FromRoute] int customerId)
     {
         CustomerService.Delete(customerId);
-        return Ok();
+        return NoContent();
     }
 
 }

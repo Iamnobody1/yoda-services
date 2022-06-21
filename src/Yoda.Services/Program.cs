@@ -22,11 +22,10 @@ builder.Services.AddCors(options =>
     );
 });
 builder.Services.AddSwaggerGen();
+builder.Services.AddTransient<ICustomerService, CustomerService>();
 builder.Services.AddTransient<ILoginService, LoginService>();
 builder.Services.AddTransient<IUserService, UserService>();
-builder.Services.AddTransient<ICustomerService, CustomerService>();
 builder.Services.AddDbContext<YodaContext>(options => options.UseNpgsql("Host=localhost;Port=5432;Database=yoda;Username=postgres;Password=postgres;"));
-
 
 var app = builder.Build();
 if (!app.Environment.IsProduction())

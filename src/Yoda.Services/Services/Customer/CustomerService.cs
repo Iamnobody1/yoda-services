@@ -24,9 +24,9 @@ namespace Yoda.Services.Services.Customer
             return cus.Id;
         }
 
-        public CustomerModel GetByID(int customerId)
+        public CustomerModel GetById(int id)
         {
-            var item = _yodaContext.Customers.FirstOrDefault(c => c.Id == customerId);
+            var item = _yodaContext.Customers.FirstOrDefault(c => c.Id == id);
             if (item == null)
             {
                 return null;
@@ -34,7 +34,7 @@ namespace Yoda.Services.Services.Customer
             return new CustomerModel() { Id = item.Id, Name = item.Name };
         }
 
-        public IQueryable<CustomerModel> GetList(int start = 0, int lenght = 2)
+        public IEnumerable<CustomerModel> GetList(int start = 0, int lenght = 2)
         {
             var item = _yodaContext.Customers.Skip(start).Take(lenght).Select(item => new CustomerModel() { Id = item.Id, Name = item.Name });
             return item;
@@ -46,7 +46,6 @@ namespace Yoda.Services.Services.Customer
             if (item != null)
             {
                 item.Name = cus.Name;
-                _yodaContext.Customers.Update(cus);
                 _yodaContext.SaveChanges();
             }
         }
@@ -54,9 +53,11 @@ namespace Yoda.Services.Services.Customer
         public void Delete(int id)
         {
             var item = _yodaContext.Customers.FirstOrDefault(d => d.Id == id);
-            _yodaContext.Customers.Remove(item);
-            _yodaContext.SaveChanges();
+            if (item != null)
+            {
+                _yodaContext.Customers.Remove(item);
+                _yodaContext.SaveChanges();
+            }
         }
-
     }
 }

@@ -4,9 +4,9 @@ namespace Yoda.Services.Services.Customer
 {
     public interface ICustomerService
     {
-        IQueryable<CustomerModel> GetList(int start = 0, int lenght = 2);
+        IEnumerable<CustomerModel> GetList(int start = 0, int lenght = 2);
         int Create(CustomerModel customer);
-        CustomerModel GetByID(int customerId);
+        CustomerModel GetById(int customerId);
         void Update(int id, CustomerEntity cus);
         void Delete(int id);
 

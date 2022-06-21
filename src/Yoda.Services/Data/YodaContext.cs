@@ -9,7 +9,7 @@ public class YodaContext : DbContext
     {
     }
 
-    public DbSet<UserEntity> Users { get; set; }
     public DbSet<CustomerEntity> Customers { get; set; }
+    public DbSet<UserEntity> Users { get; set; }
 
 }
