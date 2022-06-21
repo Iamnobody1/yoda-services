@@ -1,12 +1,10 @@
-using Yoda.Service2.Data;
 using Microsoft.EntityFrameworkCore;
+using Yoda.Service2.Services.Product;
 using Yoda.Services.Data;
-using Yoda.Services.Services.Authentication;
+using Yoda.Services.Services.Customer;
 using Yoda.Services.Services.Order;
 using Yoda.Services.Services.OrderDetailsService;
-using Yoda.Services.Services.Customer;
-using Yoda.Services.Services.User;
-using Yoda.Service2.Services.Product;
+using Yoda.Services.Services.Product;
 
 var builder = WebApplication.CreateBuilder(args);
 var allowedOrigins = builder.Configuration["AllowedOrigins"];
@@ -16,9 +14,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<ICustomerService, CustomerService>();
-builder.Services.AddTransient<ILoginService, LoginService>();
 builder.Services.AddTransient<IOrderService, OrderService>();
-builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IOrderDetailsService, OrderDetailsService>();
 builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddDbContext<YodaContext>(options => options.UseNpgsql("Host=localhost;Port=5432;Database=yoda;Username=postgres;Password=postgres;"));

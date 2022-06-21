@@ -1,4 +1,4 @@
-namespace Yoda.Service2.Models;
+namespace Yoda.Services.Models;
 
 public class ProductModel
 {

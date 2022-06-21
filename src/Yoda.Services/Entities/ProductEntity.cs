@@ -1,4 +1,4 @@
-namespace Yoda.Service2.Entities;
+namespace Yoda.Services.Entities;
 
 public class ProductEntity
 {
