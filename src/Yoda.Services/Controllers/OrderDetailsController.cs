@@ -1,56 +1,54 @@
 using Microsoft.AspNetCore.Mvc;
 using Yoda.Services.Models;
-using Yoda.Services.Services.OrderDetail;
-using Yoda.Services.Entities;
+using Yoda.Services.Services.OrderDetailsService;
 
-namespace Yoda.Services.Controllers;
-
-[ApiController]
-[Route("[controller]")]
-public class OrderDetailsController : ControllerBase
+namespace Yoda.Services.Controllers
 {
-    private readonly IOrderDetailService OrderDetailService;
+    [ApiController]
+    [Route("[controller]")]
+    public class OrderDetailsController : ControllerBase
+    {
+        private readonly IOrderDetailsService _orderDetailsService;
 
-    public OrderDetailsController(IOrderDetailService orderDetailService)
-    {
-        OrderDetailService = orderDetailService;
-    }
+        public OrderDetailsController(IOrderDetailsService orderDetailsService)
+        {
+            _orderDetailsService = orderDetailsService;
+        }
 
-    [HttpGet()]
-    public IActionResult Get([FromQuery] int start, [FromQuery] int length)
-    {
-        var result = OrderDetailService.GetList(start, length);
-        if (result == null)
-            return NotFound();
-        return Ok(result);
-    }
+        [HttpGet("{Id}")]
+        public IActionResult GetById([FromRoute] int Id)
+        {
+            var result = _orderDetailsService.GetById(Id);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
+        }
+        [HttpGet("")]
+        public IActionResult GetList([FromQuery] int start, [FromQuery] int length)
+        {
+            var result = _orderDetailsService.GetList(start, length);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
+        }
 
-    [HttpGet("{Id}")]
-    public IActionResult Get([FromRoute] int Id)
-    {
-        var result = OrderDetailService.GetById(Id);
-        if (result == null)
-            return NotFound();
-        return Ok(result);
-    }
-
-    [HttpPost()]
-    public IActionResult Post([FromBody] OrderDetailModel orderDetail)
-    {
-        var result = OrderDetailService.Create(orderDetail);
-        return Ok(result);
-    }
-    [HttpPut("{Id}")]
-    public IActionResult Put([FromRoute] int Id, [FromBody] OrderDetailEntity orderDetail)
-    {
-        OrderDetailService.Update(Id, orderDetail);
-        return Ok();
-    }
-
-    [HttpDelete("{Id}")]
-    public IActionResult Delete([FromRoute] int Id)
-    {
-        OrderDetailService.Delete(Id);
-        return NoContent();
+        [HttpPost]
+        public IActionResult Post([FromBody] OrderDetailModel orderdetails)
+        {
+            var result = _orderDetailsService.Create(orderdetails);
+            return Ok(result);
+        }
+        [HttpPut("{Id}")]
+        public IActionResult Put([FromRoute] int id, [FromBody] OrderDetailModel orderdetail)
+        {
+            _orderDetailsService.Update(id, orderdetail);
+            return Ok();
+        }
+        [HttpDelete("{Id}")]
+        public IActionResult Delete([FromRoute] int id)
+        {
+            _orderDetailsService.Delete(id);
+            return NoContent();
+        }
     }
 }
