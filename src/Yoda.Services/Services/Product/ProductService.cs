@@ -1,10 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using Yoda.Services.Data;
 using Yoda.Services.Entities;
 using Yoda.Services.Models;
-using Yoda.Services.Data;
-using Yoda.Services.Services.Product;
 
-namespace Yoda.Service2.Services.Product
+namespace Yoda.Services.Services.Product
 {
     public class ProductService : IProductService
     {
