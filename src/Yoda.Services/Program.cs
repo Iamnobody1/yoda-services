@@ -6,7 +6,7 @@ using Yoda.Services.Services.User;
 
 var builder = WebApplication.CreateBuilder(args);
 var allowedOrigins = builder.Configuration["AllowedOrigins"];
-Console.WriteLine("allowedSpecificOrigins: " + allowedOrigins);
+Console.WriteLine("AllowedOrigins: " + allowedOrigins);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddCors(options =>

@@ -7,4 +7,3 @@ namespace Yoda.Services.Entities
         public DateTimeOffset CreateDateUTC { get; set; }
     }
 }
-
