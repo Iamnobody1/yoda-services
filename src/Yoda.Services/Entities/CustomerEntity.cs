@@ -4,5 +4,7 @@ namespace Yoda.Services.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        public List<OrderEntity> Orders { get; set; }
     }
 }
