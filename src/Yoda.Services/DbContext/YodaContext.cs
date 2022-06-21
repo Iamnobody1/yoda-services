@@ -16,9 +16,27 @@ public class YodaContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<OrderEntity>().ToTable("Order");
-        modelBuilder.Entity<OrderDetailEntity>().ToTable("OrderDetail");
-        modelBuilder.Entity<ProductEntity>().ToTable("Product");
-        modelBuilder.Entity<CustomerEntity>().ToTable("Customer");
+        modelBuilder.Entity<CustomerEntity>(e =>
+        {
+            e.ToTable("Customer");
+        });
+
+        modelBuilder.Entity<OrderEntity>(e =>
+        {
+            e.ToTable("Order");
+            e.HasOne(p => p.Customer).WithMany(b => b.Orders);
+        });
+
+        modelBuilder.Entity<OrderDetailEntity>(e =>
+        {
+            e.ToTable("OrderDetail");
+            e.HasOne(p => p.Product).WithMany(b => b.OrderDetails);
+            e.HasOne(p => p.Order).WithOne(b => b.OrderDetail);
+        });
+
+        modelBuilder.Entity<ProductEntity>(e =>
+        {
+            e.ToTable("Product");
+        });
     }
 }

@@ -1,7 +1,13 @@
+<<<<<<< HEAD
 using Yoda.Services.Data;
 using Yoda.Services.Entities;
 using Yoda.Services.Models;
+=======
+>>>>>>> 46847725ea88fb4ad32039fb8923a7e2cfaa6445
 using Microsoft.EntityFrameworkCore;
+using Yoda.Services.Data;
+using Yoda.Services.Entities;
+using Yoda.Services.Models;
 
 namespace Yoda.Services.Services.Product
 {
