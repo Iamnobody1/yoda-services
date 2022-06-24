@@ -31,7 +31,7 @@ public class YodaContext : DbContext
         {
             e.ToTable("OrderDetail");
             e.HasOne(p => p.Product).WithMany(b => b.OrderDetails);
-            e.HasOne(p => p.Order).WithMany(b => b.OrderDetail);
+            e.HasOne(p => p.Order).WithMany(b => b.OrderDetails);
         });
 
         modelBuilder.Entity<ProductEntity>(e =>

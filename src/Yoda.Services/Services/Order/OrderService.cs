@@ -39,6 +39,29 @@ public class OrderService : IOrderService
         };
     }
 
+    public IEnumerable<OrdersByCustomerIdModel> GetOrdersOfCustomer(int id)
+    {
+        return _yodaContext
+            .Customers
+            .Where(cus => cus.Id == id)
+            .Select(cus => new OrdersByCustomerIdModel()
+            {
+                Id = cus.Id,
+                Name = cus.Name,
+                Orders = cus.Orders
+                .Select(order => new OrderDetailByOrderIdModel()
+                {
+                    Id = order.Id,
+                    CreateDateUtc = order.CreateDateUTC,
+                    Products = order.OrderDetails.Select(odt => new ProductModel()
+                    {
+                        Id = odt.Product.Id,
+                        Name = odt.Product.Name
+                    })
+                })
+            });
+    }
+
     public int Create(OrderModel newOrder)
     {
         var order = new OrderEntity();
