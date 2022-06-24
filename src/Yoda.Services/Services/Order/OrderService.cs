@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Yoda.Services.Data;
 using Yoda.Services.Entities;
 using Yoda.Services.Models;
@@ -43,6 +44,7 @@ public class OrderService : IOrderService
     {
         return _yodaContext
             .Customers
+            .AsNoTracking()
             .Where(cus => cus.Id == id)
             .Select(cus => new OrdersByCustomerIdModel()
             {
