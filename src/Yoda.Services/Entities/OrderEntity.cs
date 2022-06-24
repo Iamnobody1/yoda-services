@@ -7,6 +7,6 @@ namespace Yoda.Services.Entities
         public DateTimeOffset CreateDateUTC { get; set; }
 
         public CustomerEntity Customer { get; set; }
-        public OrderDetailEntity OrderDetail { get; set; }
+        public IEnumerable<OrderDetailEntity> OrderDetails { get; set; }
     }
 }
