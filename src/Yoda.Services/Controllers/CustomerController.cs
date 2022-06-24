@@ -53,5 +53,4 @@ public class CustomersController : ControllerBase
         CustomerService.Delete(customerId);
         return NoContent();
     }
-
 }
