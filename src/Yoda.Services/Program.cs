@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Yoda.Services.Data;
 using Yoda.Services.Services.Customer;
+using Yoda.Services.Services.District;
 using Yoda.Services.Services.Order;
 using Yoda.Services.Services.OrderDetailsService;
 using Yoda.Services.Services.Product;
@@ -19,6 +20,7 @@ builder.Services.AddTransient<ICustomerService, CustomerService>();
 builder.Services.AddTransient<IOrderService, OrderService>();
 builder.Services.AddTransient<IOrderDetailsService, OrderDetailsService>();
 builder.Services.AddTransient<IProductService, ProductService>();
+builder.Services.AddTransient<IDistrictService, DistrictService>();
 builder.Services.AddDbContext<YodaContext>(options => options.UseNpgsql("Host=localhost;Port=5432;Database=yoda;Username=postgres;Password=postgres;"));
 builder.Services.AddMvc();
 
