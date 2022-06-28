@@ -28,7 +28,7 @@ public class DistrictService : IDistrictService
     public IEnumerable<DisWithPosAndSubModel> GetByProvinceId(int id)
     {
         var items = _yodaContext.Districts
-        .Where(item => item.ProvinceId == id)
+        .Where(item => item.EnabledFlag == true && item.ProvinceId == id)
         .Select(dis => new DisWithPosAndSubModel()
         {
             Id = dis.Id,

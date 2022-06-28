@@ -1,9 +1,9 @@
 using Yoda.Services.Models;
 
-namespace Yoda.Services.Services.SubDistrict
+namespace Yoda.Services.Services.District;
+
+public interface ISubDistrictService
 {
-    public interface ISubDistrictService
-    {
-        IEnumerable<SubDistrictModel> GetList(int id);
-    }
+    IEnumerable<SubDistrictModel> GetList(int id);
 }
+

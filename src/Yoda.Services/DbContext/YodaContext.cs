@@ -10,6 +10,7 @@ public class YodaContext : DbContext
     }
 
     public DbSet<OrderEntity> Orders { get; set; }
+    public DbSet<AddressEntity> Addresses { get; set; }
     public DbSet<OrderDetailEntity> OrderDetails { get; set; }
     public DbSet<CustomerEntity> Customers { get; set; }
     public DbSet<ProductEntity> Products { get; set; }
@@ -21,10 +22,27 @@ public class YodaContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<AddressEntity>(e =>
+        {
+            e.ToTable("Address");
+            e.HasOne(p => p.Customer).WithOne(b => b.Address);
+        });
+
+        modelBuilder.Entity<CountryEntity>(e =>
+            {
+                e.ToTable("Country");
+            });
+
         modelBuilder.Entity<CustomerEntity>(e =>
         {
             e.ToTable("Customer");
         });
+
+        modelBuilder.Entity<DistrictEntity>(e =>
+       {
+           e.ToTable("District");
+           e.HasOne(p => p.Province).WithMany(b => b.Districts);
+       });
 
         modelBuilder.Entity<OrderEntity>(e =>
         {
@@ -50,27 +68,16 @@ public class YodaContext : DbContext
             e.ToTable("Product");
         });
 
-        modelBuilder.Entity<SubDistrictEntity>(e =>
-        {
-            e.ToTable("SubDistrict");
-            e.HasOne(p => p.District).WithMany(b => b.SubDistricts);
-        });
-
-        modelBuilder.Entity<CountryEntity>(e =>
-            {
-                e.ToTable("Country");
-            });
-
         modelBuilder.Entity<ProvinceEntity>(e =>
         {
             e.ToTable("Province");
             e.HasOne(p => p.Country).WithMany(b => b.Provinces);
         });
 
-        modelBuilder.Entity<DistrictEntity>(e =>
+        modelBuilder.Entity<SubDistrictEntity>(e =>
         {
-            e.ToTable("District");
-            e.HasOne(p => p.Province).WithMany(b => b.Districts);
+            e.ToTable("SubDistrict");
+            e.HasOne(p => p.District).WithMany(b => b.SubDistricts);
         });
     }
 }
