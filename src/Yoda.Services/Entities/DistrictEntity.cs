@@ -9,4 +9,5 @@ public class DistrictEntity
 
     public IEnumerable<SubDistrictEntity> SubDistricts { get; set; }
     public IEnumerable<PostalCodeEntity> postalCodes { get; set; }
+    public ProvinceEntity Province { get; set; }
 }
