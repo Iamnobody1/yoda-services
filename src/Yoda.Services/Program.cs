@@ -4,6 +4,7 @@ using Yoda.Services.Services.Customer;
 using Yoda.Services.Services.District;
 using Yoda.Services.Services.Order;
 using Yoda.Services.Services.OrderDetailsService;
+using Yoda.Services.Services.PostalCode;
 using Yoda.Services.Services.Product;
 using Yoda.Services.Services.Province;
 
@@ -24,6 +25,7 @@ builder.Services.AddTransient<IOrderDetailsService, OrderDetailsService>();
 builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddTransient<IDistrictService, DistrictService>();
 builder.Services.AddTransient<IProvinceService, ProvinceService>();
+builder.Services.AddTransient<IPostalCodeService, PostalCodeService>();
 builder.Services.AddDbContext<YodaContext>(options => options.UseNpgsql("Host=localhost;Port=5432;Database=yoda;Username=postgres;Password=postgres;"));
 builder.Services.AddMvc();
 
