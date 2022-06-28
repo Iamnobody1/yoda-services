@@ -8,4 +8,5 @@ public class SubDistrictEntity
     public bool EnabledFlag { get; set; }
 
     public DistrictEntity District { get; set; }
+    public IEnumerable<AddressEntity> Addresses { get; set; }
 }
