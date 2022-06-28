@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Yoda.Services.Data;
+using Yoda.Services.Services.Country;
 using Yoda.Services.Services.Customer;
 using Yoda.Services.Services.District;
 using Yoda.Services.Services.Order;
@@ -17,12 +18,14 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
     });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddTransient<IAddressService, AddressService>();
 builder.Services.AddTransient<ICustomerService, CustomerService>();
+builder.Services.AddTransient<IDistrictService, DistrictService>();
 builder.Services.AddTransient<IOrderService, OrderService>();
 builder.Services.AddTransient<IOrderDetailsService, OrderDetailsService>();
 builder.Services.AddTransient<IProductService, ProductService>();
-builder.Services.AddTransient<IDistrictService, DistrictService>();
 builder.Services.AddTransient<IProvinceService, ProvinceService>();
+builder.Services.AddTransient<ISubDistrictService, SubDistrictService>();
 builder.Services.AddDbContext<YodaContext>(options => options.UseNpgsql("Host=localhost;Port=5432;Database=yoda;Username=postgres;Password=postgres;"));
 builder.Services.AddMvc();
 
