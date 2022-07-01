@@ -13,13 +13,12 @@ namespace Yoda.Services.Services.Country
 
         public IEnumerable<CountryModel> GetList(int id)
         {
-            var items = _yodaContext.Countries
+            return _yodaContext.Countries
             .Select(country => new CountryModel()
             {
                 Id = country.Id,
                 Name = country.Name
             });
-            return null;
         }
     }
 }

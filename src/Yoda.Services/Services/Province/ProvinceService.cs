@@ -13,14 +13,13 @@ namespace Yoda.Services.Services.Province
 
         public IEnumerable<ProvinceByCountryModel> GetList(int id)
         {
-            var items = _yodaContext.Provinces
-            .Where(item => item.Country.Id == id)
+            return _yodaContext.Provinces
+            .Where(item => item.EnabledFlag == true && item.Country.Id == id)
             .Select(province => new ProvinceByCountryModel()
             {
                 Id = province.Id,
                 Name = province.Name
             });
-            return items;
         }
     }
 }
