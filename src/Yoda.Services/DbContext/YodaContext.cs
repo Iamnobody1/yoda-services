@@ -19,6 +19,9 @@ public class YodaContext : DbContext
     public DbSet<PostalCodeEntity> PostalCodes { get; set; }
     public DbSet<ProvinceEntity> Provinces { get; set; }
     public DbSet<CountryEntity> Countries { get; set; }
+    public DbSet<MapEntity> Maps { get; set; }
+    public DbSet<MapMonsterEntity> MapMonsters { get; set; }
+    public DbSet<MonsterEntity> Monsters { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -43,6 +46,23 @@ public class YodaContext : DbContext
            e.ToTable("District");
            e.HasOne(p => p.Province).WithMany(b => b.Districts);
        });
+
+        modelBuilder.Entity<MapEntity>(e =>
+        {
+            e.ToTable("Maps");
+        });
+
+        modelBuilder.Entity<MapMonsterEntity>(e =>
+        {
+            e.ToTable("MapMonsters");
+            e.HasOne(p => p.Map).WithMany(b => b.MapMonsters);
+            e.HasOne(p => p.Monster).WithMany(b => b.MapMonsters);
+        });
+
+        modelBuilder.Entity<MonsterEntity>(e =>
+        {
+            e.ToTable("Monsters");
+        });
 
         modelBuilder.Entity<OrderEntity>(e =>
         {
