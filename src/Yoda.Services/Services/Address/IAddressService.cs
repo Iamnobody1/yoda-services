@@ -4,7 +4,7 @@ namespace Yoda.Services.Services.Country;
 
 public interface IAddressService
 {
-    void Create(AddressModel newAddress);
+    int Create(AddressModel newAddress);
 }
 
 

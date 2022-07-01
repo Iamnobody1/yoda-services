@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Yoda.Services.Data;
 using Yoda.Services.Entities;
@@ -8,10 +9,12 @@ namespace Yoda.Services.Services.Order;
 public class OrderService : IOrderService
 {
     private readonly YodaContext _yodaContext;
+    private readonly IMapper _mapper;
 
-    public OrderService(YodaContext yodaContext)
+    public OrderService(YodaContext yodaContext, IMapper mapper)
     {
         _yodaContext = yodaContext;
+        _mapper = mapper;
     }
 
     public IEnumerable<OrderModel> Get(int start = 0, int length = 10)
@@ -66,12 +69,10 @@ public class OrderService : IOrderService
 
     public int Create(OrderModel newOrder)
     {
-        var order = new OrderEntity();
-        order.CustomerId = newOrder.CustomerId;
-        order.CreateDateUTC = new DateTimeOffset(DateTime.Now).ToUniversalTime();
-        _yodaContext.Orders.Add(order);
+        var item = _mapper.Map<OrderEntity>(newOrder);
+        _yodaContext.Orders.Add(item);
         _yodaContext.SaveChanges();
-        return order.Id;
+        return item.Id;
     }
 
     public void Update(int orderId, OrderEntity newOrder)

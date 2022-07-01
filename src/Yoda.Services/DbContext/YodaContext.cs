@@ -25,34 +25,40 @@ public class YodaContext : DbContext
         modelBuilder.Entity<AddressEntity>(e =>
         {
             e.ToTable("Address");
+            e.Property(p => p.Id).ValueGeneratedOnAdd();
             e.HasOne(p => p.Customer).WithOne(b => b.Address);
         });
 
         modelBuilder.Entity<CountryEntity>(e =>
-            {
-                e.ToTable("Country");
-            });
+        {
+            e.ToTable("Country");
+            e.Property(p => p.Id).ValueGeneratedOnAdd();
+        });
 
         modelBuilder.Entity<CustomerEntity>(e =>
         {
             e.ToTable("Customer");
+            e.Property(p => p.Id).ValueGeneratedOnAdd();
         });
 
         modelBuilder.Entity<DistrictEntity>(e =>
        {
            e.ToTable("District");
+           e.Property(p => p.Id).ValueGeneratedOnAdd();
            e.HasOne(p => p.Province).WithMany(b => b.Districts);
        });
 
         modelBuilder.Entity<OrderEntity>(e =>
         {
             e.ToTable("Order");
+            e.Property(p => p.Id).ValueGeneratedOnAdd();
             e.HasOne(p => p.Customer).WithMany(b => b.Orders);
         });
 
         modelBuilder.Entity<OrderDetailEntity>(e =>
         {
             e.ToTable("OrderDetail");
+            e.Property(p => p.Id).ValueGeneratedOnAdd();
             e.HasOne(p => p.Product).WithMany(b => b.OrderDetails);
             e.HasOne(p => p.Order).WithMany(b => b.OrderDetails);
         });
@@ -60,23 +66,27 @@ public class YodaContext : DbContext
         modelBuilder.Entity<PostalCodeEntity>(e =>
         {
             e.ToTable("PostalCode");
+            e.Property(p => p.Id).ValueGeneratedOnAdd();
             e.HasOne(p => p.District).WithMany(b => b.postalCodes);
         });
 
         modelBuilder.Entity<ProductEntity>(e =>
         {
             e.ToTable("Product");
+            e.Property(p => p.Id).ValueGeneratedOnAdd();
         });
 
         modelBuilder.Entity<ProvinceEntity>(e =>
         {
             e.ToTable("Province");
+            e.Property(p => p.Id).ValueGeneratedOnAdd();
             e.HasOne(p => p.Country).WithMany(b => b.Provinces);
         });
 
         modelBuilder.Entity<SubDistrictEntity>(e =>
         {
             e.ToTable("SubDistrict");
+            e.Property(p => p.Id).ValueGeneratedOnAdd();
             e.HasOne(p => p.District).WithMany(b => b.SubDistricts);
         });
     }

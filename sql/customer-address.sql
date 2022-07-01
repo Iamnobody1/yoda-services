@@ -27,3 +27,4 @@ SELECT "Id", "Name",
 FROM public."Country"
 where "EnabledFlag" = true
 ;
+alter table "Address" add constraint "Address_PostalCodeId_fkey" foreign key ("PostalCodeId") references public."PostalCode"("Id")
