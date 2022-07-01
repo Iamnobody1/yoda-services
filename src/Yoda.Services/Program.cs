@@ -16,6 +16,7 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
         options.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc;
         options.SerializerSettings.DateFormatString = "yyyy'-'MM'-'dd'T'HH':'mm':'ssZ";
     });
+builder.Services.AddMvc();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IAddressService, AddressService>();
@@ -26,9 +27,9 @@ builder.Services.AddTransient<IOrderDetailsService, OrderDetailsService>();
 builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddTransient<IProvinceService, ProvinceService>();
 builder.Services.AddTransient<ISubDistrictService, SubDistrictService>();
+
 builder.Services.AddDbContext<YodaContext>(options => options.UseNpgsql("Host=localhost;Port=5432;Database=yoda;Username=postgres;Password=postgres;"));
-builder.Services.AddDbContext<MinigameContext>(options => options.UseNpgsql("Host=localhost;Port=5432;Database=Minigame;Username=postgres;Password=postgres;"));
-builder.Services.AddMvc();
+builder.Services.AddDbContext<MinigameContext>(options => options.UseNpgsql("Host=localhost;Port=5432;Database=minigame;Username=postgres;Password=postgres;"));
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
