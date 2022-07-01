@@ -4,6 +4,6 @@ namespace Yoda.Services.Services.Map
 {
     public interface IMap
     {
-        public IEnumerable<MapModel> Map(int id);
+        public IEnumerable<MapModel> GetMapId(int id);
     }
 }
