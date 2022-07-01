@@ -7,7 +7,7 @@ namespace Yoda.Services.Models
     {
         public MonsterProfile()
         {
-            CreateMap<MonsterModel, MonsterEntity>();
+            CreateMap<MonsterModel, MonsterEntity>().ReverseMap();
         }
     }
 }

@@ -15,10 +15,10 @@ namespace Yoda.Services.Controllers
         {
             _monsterService = monsterService;
         }
-        [HttpGet]
-        public IActionResult Get([FromQuery] int Id)
+        [HttpGet("{id}")]
+        public IActionResult Get([FromRoute] int id)
         {
-            var result = _monsterService.GetListMonster(Id);
+            var result = _monsterService.GetMonsterId(id);
             if (result == null)
                 return NotFound();
             return Ok(result);

@@ -17,19 +17,19 @@ public class MinigameContext : DbContext
     {
         modelBuilder.Entity<MapEntity>(e =>
         {
-            e.ToTable("Maps");
+            e.ToTable("Map");
         });
 
         modelBuilder.Entity<MapMonsterEntity>(e =>
         {
-            e.ToTable("MapMonsters");
+            e.ToTable("MapMonster");
             e.HasOne(p => p.Map).WithMany(b => b.MapMonsters);
             e.HasOne(p => p.Monster).WithMany(b => b.MapMonsters);
         });
 
         modelBuilder.Entity<MonsterEntity>(e =>
         {
-            e.ToTable("Monsters");
+            e.ToTable("Monster");
         });
     }
 }
