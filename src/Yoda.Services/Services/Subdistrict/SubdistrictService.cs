@@ -1,20 +1,27 @@
+using Microsoft.EntityFrameworkCore;
 using Yoda.Services.Data;
 using Yoda.Services.Models;
 
-namespace Yoda.Services.Services.Subdistrict
+namespace Yoda.Services.Services.District;
+
+public class SubDistrictService : ISubDistrictService
 {
-    public class SubdistrictService : ISubdistrictService
+    private readonly YodaContext _yodaContext;
+
+    public SubDistrictService(YodaContext yodaContext)
     {
-        private readonly YodaContext _yodacontext;
+        _yodaContext = yodaContext;
+    }
 
-        public SubdistrictService(YodaContext yodacontext)
+    public IEnumerable<SubDistrictModel> GetList(int id)
+    {
+        return _yodaContext.SubDistricts
+        .AsNoTracking()
+        .Where(item => item.EnabledFlag == true && item.DistrictId == id)
+        .Select(dis => new SubDistrictModel()
         {
-            _yodacontext = yodacontext;
-        }
-
-        public IEnumerable<SubDistrictModel> GetList(int id)
-        {
-            throw new NotImplementedException();
-        }
+            Id = dis.Id,
+            Name = dis.Name,
+        });
     }
 }
