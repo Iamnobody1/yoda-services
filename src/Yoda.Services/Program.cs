@@ -27,6 +27,7 @@ builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddTransient<IProvinceService, ProvinceService>();
 builder.Services.AddTransient<ISubDistrictService, SubDistrictService>();
 builder.Services.AddDbContext<YodaContext>(options => options.UseNpgsql("Host=localhost;Port=5432;Database=yoda;Username=postgres;Password=postgres;"));
+builder.Services.AddDbContext<MinigameContext>(options => options.UseNpgsql("Host=localhost;Port=5432;Database=Minigame;Username=postgres;Password=postgres;"));
 builder.Services.AddMvc();
 
 var app = builder.Build();
