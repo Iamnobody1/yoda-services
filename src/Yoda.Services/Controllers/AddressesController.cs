@@ -18,7 +18,7 @@ public class AddressesController : ControllerBase
     [HttpPost]
     public IActionResult Post([FromBody] AddressModel address)
     {
-        _addressService.Create(address);
-        return Ok();
+        var result = _addressService.Create(address);
+        return Ok(result);
     }
 }
