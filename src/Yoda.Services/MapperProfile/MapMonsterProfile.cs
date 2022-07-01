@@ -8,6 +8,6 @@ public class MapMonsterProfile : Profile
 {
     public MapMonsterProfile()
     {
-        CreateMap<MapMonsterModel, MapMonsterEntity>();
+        CreateMap<MapMonsterModel, MapMonsterEntity>().ReverseMap();
     }
 }
