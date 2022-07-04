@@ -33,3 +33,23 @@ CREATE TABLE public."OrderDetail" (
     "UnitPrice" decimal null,
     CONSTRAINT "OrderDetail_ID_PK" PRIMARY KEY ("ID")
 );
+
+CREATE TABLE "Map" (
+  "Id" SERIAL PRIMARY KEY,
+  "Name" varchar,
+  "BackgroundImage" varchar
+);
+
+CREATE TABLE "MapMonster" (
+  "Id" SERIAL PRIMARY KEY,
+  "MapId" int,
+  "MonsterId" int,
+  "PositionX" float,
+  "PositionY" float,
+  "Facing" varchar,
+  "CurrentHealth" int
+);
+
+ALTER TABLE "MapMonster" ADD FOREIGN KEY ("MonsterId") REFERENCES "Monster" ("Id");
+
+ALTER TABLE "MapMonster" ADD FOREIGN KEY ("MapId") REFERENCES "Map" ("Id");
