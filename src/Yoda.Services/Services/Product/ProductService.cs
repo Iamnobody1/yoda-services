@@ -1,4 +1,6 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+
 using Yoda.Services.Data;
 using Yoda.Services.Entities;
 using Yoda.Services.Models;
@@ -8,10 +10,12 @@ namespace Yoda.Services.Services.Product
     public class ProductService : IProductService
     {
         private readonly YodaContext _DataContext;
+        private readonly IMapper _mapper;
 
-        public ProductService(YodaContext DataContext)
+        public ProductService(YodaContext dataContext, IMapper mapper)
         {
-            _DataContext = DataContext;
+            _DataContext = dataContext;
+            _mapper = mapper;
         }
 
         public ProductModel GetById(int id)
@@ -37,8 +41,7 @@ namespace Yoda.Services.Services.Product
 
         public int Create(ProductModel product)
         {
-            var item = new ProductEntity();
-            item.Name = product.Name;
+            var item = _mapper.Map<ProductEntity>(product);
             _DataContext.Products.Add(item);
             _DataContext.SaveChanges();
             return item.Id;
