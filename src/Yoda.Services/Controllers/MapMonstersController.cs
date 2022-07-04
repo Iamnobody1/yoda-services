@@ -39,6 +39,13 @@ public class MapMonstersController : ControllerBase
         return Ok();
     }
 
+    [HttpPut("{mapMonsterId}")]
+    public IActionResult DecrementHealth([FromRoute] int mapMonsterId, [FromQuery] int value)
+    {
+        _mapMonsterService.DecrementHealth(mapMonsterId, value);
+        return Ok();
+    }
+
     [HttpDelete("{mapMonsterId}")]
     public IActionResult Delete([FromRoute] int mapMonsterId)
     {
