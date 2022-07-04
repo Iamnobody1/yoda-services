@@ -1,5 +1,4 @@
 using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using Yoda.Services.Data;
 using Yoda.Services.Entities;
 using Yoda.Services.Models;
@@ -8,13 +7,21 @@ namespace Yoda.Services.Services.Monster
 {
     public class MonsterService : IMonsterService
     {
-        private readonly MinigameContext _minigameContext;
         private readonly IMapper _mapper;
+        private readonly MinigameContext _minigameContext;
 
-        public MonsterService(MinigameContext minigameContext, IMapper mapper)
+        public MonsterService(IMapper mapper, MinigameContext minigameContext)
         {
-            _minigameContext = minigameContext;
             _mapper = mapper;
+            _minigameContext = minigameContext;
+        }
+
+        public MonsterModel GetMonsterById(int id)
+        {
+            var item = _minigameContext.Monsters.FirstOrDefault(m => m.Id == id);
+            if (item == null)
+                return null;
+            return _mapper.Map<MonsterModel>(item);
         }
 
         public int Create(MonsterModel monster)
@@ -23,25 +30,6 @@ namespace Yoda.Services.Services.Monster
             _minigameContext.Monsters.Add(item);
             _minigameContext.SaveChanges();
             return item.Id;
-        }
-
-        public void Delete(int id)
-        {
-            var item = _minigameContext.Monsters.FirstOrDefault(d => d.Id == id);
-            if (item != null)
-            {
-                _minigameContext.Monsters.Remove(item);
-                _minigameContext.SaveChanges();
-            }
-        }
-
-        public MonsterModel GetMonsterId(int id)
-        {
-            var item = _minigameContext.Monsters.FirstOrDefault(m => m.Id == id);
-            if (item == null)
-                return null;
-            return _mapper.Map<MonsterModel>(item);
-
         }
 
         public void Update(int id, MonsterEntity mon)
@@ -55,6 +43,16 @@ namespace Yoda.Services.Services.Monster
                 item.Width = mon.Width;
                 item.Height = mon.Height;
                 item.RespawnTime = mon.RespawnTime;
+                _minigameContext.SaveChanges();
+            }
+        }
+
+        public void Delete(int id)
+        {
+            var item = _minigameContext.Monsters.FirstOrDefault(d => d.Id == id);
+            if (item != null)
+            {
+                _minigameContext.Monsters.Remove(item);
                 _minigameContext.SaveChanges();
             }
         }

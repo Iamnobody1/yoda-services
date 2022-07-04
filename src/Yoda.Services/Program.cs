@@ -13,16 +13,26 @@ using Yoda.Services.Services.Province;
 
 var builder = WebApplication.CreateBuilder(args);
 var allowedOrigins = builder.Configuration["AllowedOrigins"];
-
-builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(
+        nameof(allowedOrigins),
+        policy =>
+        {
+            policy.WithOrigins(allowedOrigins.Split(';'))
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        }
+    );
+});
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
     {
         options.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc;
         options.SerializerSettings.DateFormatString = builder.Configuration.GetValue<String>("DateFormatString");
     });
 builder.Services.AddMvc();
-builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddTransient<IAddressService, AddressService>();
 builder.Services.AddTransient<ICustomerService, CustomerService>();
 builder.Services.AddTransient<IDistrictService, DistrictService>();
@@ -47,4 +57,5 @@ app.UseDeveloperExceptionPage();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+app.UseCors(nameof(allowedOrigins));
 app.Run();

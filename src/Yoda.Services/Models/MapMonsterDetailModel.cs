@@ -1,6 +1,6 @@
 namespace Yoda.Services.Models;
 
-public class MapMonsterModel
+public class MapMonsterDetailModel
 {
     public int Id { get; set; }
     public int MapId { get; set; }
@@ -9,4 +9,5 @@ public class MapMonsterModel
     public int PositionY { get; set; }
     public string Facing { get; set; }
     public int CurrentHealth { get; set; }
+    public MonsterModel Monster { get; set; }
 }
