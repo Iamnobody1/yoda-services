@@ -94,4 +94,3 @@ public class YodaContext : DbContext
         });
     }
 }
-

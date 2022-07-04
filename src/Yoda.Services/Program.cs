@@ -4,6 +4,7 @@ using Yoda.Services.Services.Country;
 using Yoda.Services.Services.Customer;
 using Yoda.Services.Services.District;
 using Yoda.Services.Services.Monster;
+using Yoda.Services.Services.MapMonster;
 using Yoda.Services.Services.Order;
 using Yoda.Services.Services.OrderDetailsService;
 using Yoda.Services.Services.PostalCode;
@@ -12,7 +13,6 @@ using Yoda.Services.Services.Province;
 
 var builder = WebApplication.CreateBuilder(args);
 var allowedOrigins = builder.Configuration["AllowedOrigins"];
-Console.WriteLine("AllowedOrigins: " + allowedOrigins);
 
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
@@ -27,6 +27,7 @@ builder.Services.AddTransient<IAddressService, AddressService>();
 builder.Services.AddTransient<ICustomerService, CustomerService>();
 builder.Services.AddTransient<IDistrictService, DistrictService>();
 builder.Services.AddTransient<IMonsterService, MonsterService>();
+builder.Services.AddTransient<IMapMonsterService, MapMonsterService>();
 builder.Services.AddTransient<IOrderService, OrderService>();
 builder.Services.AddTransient<IOrderDetailsService, OrderDetailsService>();
 builder.Services.AddTransient<IProductService, ProductService>();

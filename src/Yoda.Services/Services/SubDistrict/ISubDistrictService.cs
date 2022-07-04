@@ -6,3 +6,4 @@ public interface ISubDistrictService
 {
     IEnumerable<SubDistrictModel> GetList(int id);
 }
+
