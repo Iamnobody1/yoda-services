@@ -51,23 +51,6 @@ public class YodaContext : DbContext
            e.HasOne(p => p.Province).WithMany(b => b.Districts);
        });
 
-        modelBuilder.Entity<MapEntity>(e =>
-        {
-            e.ToTable("Maps");
-        });
-
-        modelBuilder.Entity<MapMonsterEntity>(e =>
-        {
-            e.ToTable("MapMonsters");
-            e.HasOne(p => p.Map).WithMany(b => b.MapMonsters);
-            e.HasOne(p => p.Monster).WithMany(b => b.MapMonsters);
-        });
-
-        modelBuilder.Entity<MonsterEntity>(e =>
-        {
-            e.ToTable("Monsters");
-        });
-
         modelBuilder.Entity<OrderEntity>(e =>
         {
             e.ToTable("Order");
@@ -111,4 +94,3 @@ public class YodaContext : DbContext
         });
     }
 }
-
