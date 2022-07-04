@@ -1,3 +1,4 @@
+using AutoMapper;
 using Yoda.Services.Data;
 
 using Yoda.Services.Entities;
@@ -8,20 +9,21 @@ namespace Yoda.Services.Services.Customer
     public class CustomerService : ICustomerService
     {
         private readonly YodaContext _yodaContext;
+        private readonly IMapper _mapper;
 
-        public CustomerService(YodaContext yodaContext)
+        public CustomerService(YodaContext yodaContext, IMapper mapper)
         {
             _yodaContext = yodaContext;
+            _mapper = mapper;
         }
 
 
         public int Create(CustomerModel customer)
         {
-            var cus = new CustomerEntity();
-            cus.Name = customer.Name;
-            _yodaContext.Customers.Add(cus);
+            var item = _mapper.Map<CustomerEntity>(customer);
+            _yodaContext.Customers.Add(item);
             _yodaContext.SaveChanges();
-            return cus.Id;
+            return item.Id;
         }
 
         public CustomerModel GetById(int id)

@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Yoda.Services.Data;
 using Yoda.Services.Entities;
@@ -8,24 +9,20 @@ namespace Yoda.Services.Services.OrderDetailsService
     public class OrderDetailsService : IOrderDetailsService
     {
         private readonly YodaContext _yodaContext;
+        private readonly IMapper _mapper;
 
-        public OrderDetailsService(YodaContext yodacontext)
+        public OrderDetailsService(YodaContext yodaContext, IMapper mapper)
         {
-            _yodaContext = yodacontext;
+            _yodaContext = yodaContext;
+            _mapper = mapper;
         }
 
         public int Create(OrderDetailModel orderDetail)
         {
-            var order = new OrderDetailEntity()
-            {
-                OrderId = orderDetail.OrderId,
-                ProductId = orderDetail.ProductId,
-                Quantity = orderDetail.Quantity,
-                UnitPrice = orderDetail.UnitPrice,
-            };
-            _yodaContext.OrderDetails?.Add(order);
+            var item = _mapper.Map<OrderDetailEntity>(orderDetail);
+            _yodaContext.OrderDetails?.Add(item);
             _yodaContext.SaveChanges();
-            return order.Id;
+            return item.Id;
         }
 
         public void Delete(int id)

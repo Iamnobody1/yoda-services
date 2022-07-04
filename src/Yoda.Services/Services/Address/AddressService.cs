@@ -1,3 +1,4 @@
+using AutoMapper;
 using Yoda.Services.Data;
 using Yoda.Services.Entities;
 using Yoda.Services.Models;
@@ -7,22 +8,20 @@ namespace Yoda.Services.Services.Country;
 public class AddressService : IAddressService
 {
     private readonly YodaContext _yodaContext;
+    private readonly IMapper _mapper;
 
-    public AddressService(YodaContext yodaContext)
+    public AddressService(YodaContext yodaContext, IMapper mapper)
     {
         _yodaContext = yodaContext;
+        _mapper = mapper;
     }
 
-    public void Create(AddressModel newAddress)
+    public int Create(AddressModel address)
     {
-        var address = new AddressEntity();
-        address.CustomerId = newAddress.CustomerId;
-        address.SubDistrictId = newAddress.SubDistrictId;
-        address.Address = newAddress.Address;
-        address.EnabledFlag = true;
-        address.PostalCode = newAddress.PostalCode;
-        _yodaContext.Addresses.Add(address);
+        var item = _mapper.Map<AddressEntity>(address);
+        _yodaContext.Addresses.Add(item);
         _yodaContext.SaveChanges();
+        return item.Id;
     }
 }
 
