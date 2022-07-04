@@ -54,9 +54,9 @@ public class MapMonsterService : IMapMonsterService
         return item.Id;
     }
 
-    public void Update(int Id, MapMonsterEntity newMapMonter)
+    public void Update(int mapMonsterId, MapMonsterEntity newMapMonter)
     {
-        var item = _minigameContext.MapMonsters.FirstOrDefault(s => s.Id == Id);
+        var item = _minigameContext.MapMonsters.FirstOrDefault(s => s.Id == mapMonsterId);
         if (item != null)
         {
             item.MapId = newMapMonter.MapId;
@@ -65,6 +65,17 @@ public class MapMonsterService : IMapMonsterService
             item.PositionY = newMapMonter.PositionY;
             item.Facing = newMapMonter.Facing;
             item.CurrentHealth = newMapMonter.CurrentHealth;
+            _minigameContext.MapMonsters.Update(item);
+            _minigameContext.SaveChanges();
+        }
+    }
+
+    public void DecrementHealth(int mapMonsterId, int value)
+    {
+        var item = _minigameContext.MapMonsters.FirstOrDefault(s => s.Id == mapMonsterId);
+        if (item != null)
+        {
+            item.CurrentHealth = item.CurrentHealth - value;
             _minigameContext.MapMonsters.Update(item);
             _minigameContext.SaveChanges();
         }
