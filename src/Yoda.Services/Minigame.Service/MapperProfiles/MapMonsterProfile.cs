@@ -1,5 +1,5 @@
 using AutoMapper;
-using Yoda.Services.Entities;
+using Yoda.Services.
 using Yoda.Services.Models;
 
 namespace Yoda.Services.MapperProfile;
