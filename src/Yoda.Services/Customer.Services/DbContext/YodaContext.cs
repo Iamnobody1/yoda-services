@@ -19,9 +19,6 @@ public class YodaContext : DbContext
     public DbSet<PostalCodeEntity> PostalCodes { get; set; }
     public DbSet<ProvinceEntity> Provinces { get; set; }
     public DbSet<CountryEntity> Countries { get; set; }
-    public DbSet<MapEntity> Maps { get; set; }
-    public DbSet<MapMonsterEntity> MapMonsters { get; set; }
-    public DbSet<MonsterEntity> Monsters { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
