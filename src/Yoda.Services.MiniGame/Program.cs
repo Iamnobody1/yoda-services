@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Yoda.Services.MiniGame.Data;
 using Yoda.Services.MiniGame.Services.Monster;
 using Yoda.Services.MiniGame.Services.MapMonster;
+using Yoda.Services.MiniGame.Services.Map;
 
 var builder = WebApplication.CreateBuilder(args);
 var allowedOrigins = builder.Configuration["AllowedOrigins"];
@@ -25,6 +26,7 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
 builder.Services.AddMvc();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddTransient<IMapService, MapService>();
 builder.Services.AddTransient<IMonsterService, MonsterService>();
 builder.Services.AddTransient<IMapMonsterService, MapMonsterService>();
 builder.Services.AddDbContext<MinigameContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("Minigame")));
