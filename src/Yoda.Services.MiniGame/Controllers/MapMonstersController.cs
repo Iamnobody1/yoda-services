@@ -26,10 +26,12 @@ public class MapMonstersController : ControllerBase
     }
 
     [HttpGet]
+
     public async Task<IActionResult> GetMonsters([FromQuery] int mapId)
     {
         var result = await _mapMonsterService.GetMonsters(mapId);
         if (result == null || !result.Any())
+
             return NotFound();
         return Ok(result);
     }
