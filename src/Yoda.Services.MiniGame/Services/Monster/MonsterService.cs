@@ -32,17 +32,14 @@ namespace Yoda.Services.MiniGame.Services.Monster
             return item.Id;
         }
 
-        public void Update(int id, MonsterEntity mon)
+        public void Update(int id, MonsterModel mon)
         {
-            var item = _minigameContext.Monsters.FirstOrDefault(u => u.Id == id);
+            mon.Id = id;
+            var item = _minigameContext.Monsters.FirstOrDefault(u => u.Id == mon.Id);
             if (item != null)
             {
-                item.Name = mon.Name;
-                item.Health = mon.Health;
-                item.Sprite = mon.Sprite;
-                item.Width = mon.Width;
-                item.Height = mon.Height;
-                item.RespawnTime = mon.RespawnTime;
+                var x = _mapper.Map<MonsterModel, MonsterEntity>(mon, item);
+                _minigameContext.Monsters.Attach(item);
                 _minigameContext.SaveChanges();
             }
         }

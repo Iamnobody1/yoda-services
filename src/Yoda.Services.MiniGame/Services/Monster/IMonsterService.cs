@@ -7,7 +7,7 @@ namespace Yoda.Services.MiniGame.Services.Monster
     {
         MonsterModel GetMonsterById(int id);
         int Create(MonsterModel monster);
-        void Update(int id, MonsterEntity mon);
+        void Update(int id, MonsterModel mon);
         void Delete(int id);
 
     }
