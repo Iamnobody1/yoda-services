@@ -33,7 +33,7 @@ public class MapsController : ControllerBase
     }
 
     [HttpPut("{mapId}")]
-    public IActionResult Put([FromRoute] int mapId, [FromBody] MapEntity mapMonster)
+    public IActionResult Put([FromRoute] int mapId, [FromBody] MapModel mapMonster)
     {
         _mapService.Update(mapId, mapMonster);
         return Ok();

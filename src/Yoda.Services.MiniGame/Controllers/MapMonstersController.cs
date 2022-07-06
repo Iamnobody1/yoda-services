@@ -16,15 +16,17 @@ public class MapMonstersController : ControllerBase
         _mapMonsterService = mapMonsterService;
     }
 
-    [HttpPost]
-    public IActionResult Post([FromBody] MapMonsterModel mapMonster)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetMonsterAsync([FromRoute] int id)
     {
-        var result = _mapMonsterService.Create(mapMonster);
+        var result = await _mapMonsterService.GetMonster(id);
+        if (result == null)
+            return NotFound();
         return Ok(result);
     }
 
     [HttpGet]
-    public IActionResult Get([FromQuery] int mapId)
+    public IActionResult GetMonsters([FromQuery] int mapId)
     {
         var result = _mapMonsterService.GetMonsters(mapId);
         if (result == null || !result.Any())
@@ -32,8 +34,15 @@ public class MapMonstersController : ControllerBase
         return Ok(result);
     }
 
+    [HttpPost]
+    public IActionResult Post([FromBody] MapMonsterModel mapMonster)
+    {
+        var result = _mapMonsterService.Create(mapMonster);
+        return Ok(result);
+    }
+
     [HttpPut("{mapMonsterId}")]
-    public IActionResult Put([FromRoute] int mapMonsterId, [FromBody] MapMonsterEntity mapMonster)
+    public IActionResult Put([FromRoute] int mapMonsterId, [FromBody] MapMonsterModel mapMonster)
     {
         _mapMonsterService.Update(mapMonsterId, mapMonster);
         return Ok();

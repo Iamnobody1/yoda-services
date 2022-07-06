@@ -33,7 +33,7 @@ namespace Yoda.Services.MiniGame.Controllers
         }
 
         [HttpPut("{Id}")]
-        public IActionResult Put([FromRoute] int id, [FromBody] MonsterEntity monster)
+        public IActionResult Put([FromRoute] int id, [FromBody] MonsterModel monster)
         {
             _monsterService.Update(id, monster);
             return Ok();

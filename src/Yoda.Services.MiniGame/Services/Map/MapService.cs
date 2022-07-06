@@ -33,13 +33,14 @@ namespace Yoda.Services.MiniGame.Services.Map
             return item.Id;
         }
 
-        public void Update(int id, MapEntity mon)
+        public void Update(int id, MapModel map)
         {
-            var item = _minigameContext.Maps.FirstOrDefault(u => u.Id == id);
+            map.Id = id;
+            var item = _minigameContext.Maps.FirstOrDefault(u => u.Id == map.Id);
             if (item != null)
             {
-                item.Name = mon.Name;
-                item.BackgroundImage = mon.BackgroundImage;
+                var x = _mapper.Map<MapModel, MapEntity>(map, item);
+                _minigameContext.Maps.Attach(item);
                 _minigameContext.SaveChanges();
             }
         }

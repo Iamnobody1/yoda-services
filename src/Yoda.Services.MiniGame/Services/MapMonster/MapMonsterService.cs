@@ -1,4 +1,6 @@
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
 using Yoda.Services.MiniGame.Data;
 using Yoda.Services.MiniGame.Entities;
 using Yoda.Services.MiniGame.Models;
@@ -16,33 +18,27 @@ public class MapMonsterService : IMapMonsterService
         _minigameContext = minigameContext;
     }
 
+    public async Task<MapMonsterDetailModel> GetMonster(int mapMonsterId)
+    {
+        var item = await _minigameContext.MapMonsters
+            .AsNoTracking()
+            .ProjectTo<MapMonsterDetailModel>(_mapper.ConfigurationProvider)
+            .FirstOrDefaultAsync(m => m.Id == mapMonsterId);
+
+        if (item == null)
+            return null;
+        return item;
+    }
+
     public IEnumerable<MapMonsterDetailModel> GetMonsters(int mapId)
     {
-        var data = _minigameContext.MapMonsters
-            .Where(x => x.MapId == mapId)
-            .Select(x => new MapMonsterDetailModel
-            {
-                Id = x.Id,
-                MapId = x.MapId,
-                MonsterId = x.MonsterId,
-                PositionX = x.PositionX,
-                PositionY = x.PositionY,
-                Facing = x.Facing,
-                CurrentHealth = x.CurrentHealth,
-                Monster = new MonsterModel
-                {
-                    Id = x.Monster.Id,
-                    Name = x.Monster.Name,
-                    Health = x.Monster.Health,
-                    Sprite = x.Monster.Sprite,
-                    Width = x.Monster.Width,
-                    Height = x.Monster.Height,
-                    RespawnTime = x.Monster.RespawnTime,
-                }
-            })
+        var item = _minigameContext.MapMonsters
+            .Where(m => m.Id == mapId)
             .ToList();
 
-        return data;
+        if (item == null)
+            return null;
+        return _mapper.Map<IEnumerable<MapMonsterDetailModel>>(item);
     }
 
     public int Create(MapMonsterModel mapMonster)
@@ -54,18 +50,14 @@ public class MapMonsterService : IMapMonsterService
         return item.Id;
     }
 
-    public void Update(int mapMonsterId, MapMonsterEntity newMapMonter)
+    public void Update(int id, MapMonsterModel mapMonster)
     {
-        var item = _minigameContext.MapMonsters.FirstOrDefault(s => s.Id == mapMonsterId);
+        mapMonster.Id = id;
+        var item = _minigameContext.MapMonsters.FirstOrDefault(s => s.Id == mapMonster.Id);
         if (item != null)
         {
-            item.MapId = newMapMonter.MapId;
-            item.MonsterId = newMapMonter.MonsterId;
-            item.PositionX = newMapMonter.PositionX;
-            item.PositionY = newMapMonter.PositionY;
-            item.Facing = newMapMonter.Facing;
-            item.CurrentHealth = newMapMonter.CurrentHealth;
-            _minigameContext.MapMonsters.Update(item);
+            var x = _mapper.Map<MapMonsterModel, MapMonsterEntity>(mapMonster, item);
+            _minigameContext.MapMonsters.Attach(item);
             _minigameContext.SaveChanges();
         }
     }
@@ -76,7 +68,7 @@ public class MapMonsterService : IMapMonsterService
         if (item != null)
         {
             item.CurrentHealth = item.CurrentHealth - value;
-            _minigameContext.MapMonsters.Update(item);
+            _minigameContext.MapMonsters.Attach(item);
             _minigameContext.SaveChanges();
         }
     }
