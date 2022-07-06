@@ -29,7 +29,7 @@ public class MapMonstersController : ControllerBase
     public IActionResult GetMonsters([FromQuery] int mapId)
     {
         var result = _mapMonsterService.GetMonsters(mapId);
-        if (result == null || !result.Any())
+        if (result == null)
             return NotFound();
         return Ok(result);
     }

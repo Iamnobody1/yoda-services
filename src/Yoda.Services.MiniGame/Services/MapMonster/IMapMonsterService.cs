@@ -4,10 +4,10 @@ namespace Yoda.Services.MiniGame.Services.MapMonster;
 
 public interface IMapMonsterService
 {
-    int Create(MapMonsterModel mapMonster);
-    void DecrementHealth(int mapMonsterId, int value);
-    void Delete(int Id);
+    Task<int> Create(MapMonsterModel mapMonster);
+    Task DecrementHealth(int mapMonsterId, int value);
+    Task Delete(int Id);
     Task<MapMonsterDetailModel> GetMonster(int mapMonsterId);
-    IEnumerable<MapMonsterDetailModel> GetMonsters(int mapId);
-    void Update(int id, MapMonsterModel mapMonster);
+    Task<IEnumerable<MapMonsterDetailModel>> GetMonsters(int mapId);
+    Task Update(int id, MapMonsterModel mapMonster);
 }
