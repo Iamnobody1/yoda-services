@@ -8,6 +8,6 @@ namespace Yoda.Services.MiniGame.Services.Map
         int Create(MapModel Map);
         void Delete(int id);
         MapModel GetMapById(int id);
-        void Update(int id, MapEntity mon);
+        void Update(int id, MapModel mon);
     }
 }

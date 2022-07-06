@@ -72,7 +72,7 @@ public class MapMonsterService : IMapMonsterService
         if (item != null)
         {
             item.CurrentHealth = item.CurrentHealth - value;
-            _minigameContext.MapMonsters.Update(item);
+            _minigameContext.MapMonsters.Attach(item);
             _minigameContext.SaveChanges();
         }
     }
