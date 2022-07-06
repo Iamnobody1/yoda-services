@@ -17,9 +17,9 @@ public class MapMonstersController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public IActionResult GetMonster([FromRoute] int id)
+    public async Task<IActionResult> GetMonsterAsync([FromRoute] int id)
     {
-        var result = _mapMonsterService.GetMonster(id);
+        var result = await _mapMonsterService.GetMonster(id);
         if (result == null)
             return NotFound();
         return Ok(result);

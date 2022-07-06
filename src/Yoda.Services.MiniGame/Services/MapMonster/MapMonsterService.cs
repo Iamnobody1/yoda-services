@@ -18,16 +18,16 @@ public class MapMonsterService : IMapMonsterService
         _minigameContext = minigameContext;
     }
 
-    public MapMonsterDetailModel GetMonster(int mapMonsterId)
+    public async Task<MapMonsterDetailModel> GetMonster(int mapMonsterId)
     {
-        var item = _minigameContext.MapMonsters
+        var item = await _minigameContext.MapMonsters
             .AsNoTracking()
             .ProjectTo<MapMonsterDetailModel>(_mapper.ConfigurationProvider)
-            .FirstOrDefault(m => m.Id == mapMonsterId);
+            .FirstOrDefaultAsync(m => m.Id == mapMonsterId);
 
         if (item == null)
             return null;
-        return null;
+        return item;
     }
 
     public IEnumerable<MapMonsterDetailModel> GetMonsters(int mapId)

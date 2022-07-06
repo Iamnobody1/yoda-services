@@ -12,6 +12,6 @@ public class MapMonsterProfile : Profile
             .ReverseMap();
 
         CreateMap<MapMonsterEntity, MapMonsterDetailModel>()
-            .ForMember(dest => dest.Monster, opt => opt.MapFrom(src => src.Monster));
+            .ReverseMap();
     }
 }
