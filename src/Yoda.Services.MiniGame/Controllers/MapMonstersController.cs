@@ -26,39 +26,39 @@ public class MapMonstersController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult GetMonsters([FromQuery] int mapId)
+    public async Task<IActionResult> GetMonstersAsync([FromQuery] int mapId)
     {
-        var result = _mapMonsterService.GetMonsters(mapId);
+        var result = await _mapMonsterService.GetMonsters(mapId);
         if (result == null)
             return NotFound();
         return Ok(result);
     }
 
     [HttpPost]
-    public IActionResult Post([FromBody] MapMonsterModel mapMonster)
+    public async Task<IActionResult> PostAsync([FromBody] MapMonsterModel mapMonster)
     {
-        var result = _mapMonsterService.Create(mapMonster);
+        var result = await _mapMonsterService.Create(mapMonster);
         return Ok(result);
     }
 
     [HttpPut("{mapMonsterId}")]
-    public IActionResult Put([FromRoute] int mapMonsterId, [FromBody] MapMonsterModel mapMonster)
+    public async Task<IActionResult> PutAsync([FromRoute] int mapMonsterId, [FromBody] MapMonsterModel mapMonster)
     {
-        _mapMonsterService.Update(mapMonsterId, mapMonster);
+        await _mapMonsterService.Update(mapMonsterId, mapMonster);
         return Ok();
     }
 
     [HttpPut("{mapMonsterId}/decrement-health")]
-    public IActionResult DecrementHealth([FromRoute] int mapMonsterId, [FromQuery] int value)
+    public async Task<IActionResult> DecrementHealthAsync([FromRoute] int mapMonsterId, [FromQuery] int value)
     {
-        _mapMonsterService.DecrementHealth(mapMonsterId, value);
+        await _mapMonsterService.DecrementHealth(mapMonsterId, value);
         return Ok();
     }
 
     [HttpDelete("{mapMonsterId}")]
-    public IActionResult Delete([FromRoute] int mapMonsterId)
+    public async Task<IActionResult> DeleteAsync([FromRoute] int mapMonsterId)
     {
-        _mapMonsterService.Delete(mapMonsterId);
+        await _mapMonsterService.Delete(mapMonsterId);
         return NoContent();
     }
 }
