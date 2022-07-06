@@ -17,33 +17,33 @@ public class MapsController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult Get([FromQuery] int mapId)
+    public async Task<IActionResult> Get([FromQuery] int mapId)
     {
-        var result = _mapService.GetMapById(mapId);
+        var result = await _mapService.GetMapById(mapId);
         if (result == null)
             return NotFound();
         return Ok(result);
     }
 
     [HttpPost]
-    public IActionResult Post([FromBody] MapModel map)
+    public async Task<IActionResult> Post([FromBody] MapModel map)
     {
-        var result = _mapService.Create(map);
+        var result = await _mapService.CreateAsync(map);
         return Ok(result);
     }
 
     [HttpPut("{mapId}")]
-    public IActionResult Put([FromRoute] int mapId, [FromBody] MapModel mapMonster)
+    public async Task<IActionResult> Put([FromRoute] int mapId, [FromBody] MapModel mapMonster)
     {
-        _mapService.Update(mapId, mapMonster);
+        await _mapService.Update(mapId, mapMonster);
         return Ok();
     }
 
 
     [HttpDelete("{mapId}")]
-    public IActionResult Delete([FromRoute] int mapId)
+    public async Task<IActionResult> Delete([FromRoute] int mapId)
     {
-        _mapService.Delete(mapId);
+        await _mapService.Delete(mapId);
         return NoContent();
     }
 }

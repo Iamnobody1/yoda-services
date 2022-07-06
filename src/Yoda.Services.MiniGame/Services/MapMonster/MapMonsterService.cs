@@ -30,56 +30,56 @@ public class MapMonsterService : IMapMonsterService
         return item;
     }
 
-    public IEnumerable<MapMonsterDetailModel> GetMonsters(int mapId)
+    public async Task<IEnumerable<MapMonsterDetailModel>> GetMonsters(int mapId)
     {
-        var item = _minigameContext.MapMonsters
+        var item = await _minigameContext.MapMonsters
             .Where(m => m.Id == mapId)
-            .ToList();
+            .ToListAsync();
 
         if (item == null)
             return null;
         return _mapper.Map<IEnumerable<MapMonsterDetailModel>>(item);
     }
 
-    public int Create(MapMonsterModel mapMonster)
+    public async Task<int> Create(MapMonsterModel mapMonster)
     {
         var item = _mapper.Map<MapMonsterEntity>(mapMonster);
-        _minigameContext.MapMonsters.Add(item);
-        _minigameContext.SaveChanges();
+        await _minigameContext.MapMonsters.AddAsync(item);
+        await _minigameContext.SaveChangesAsync();
 
         return item.Id;
     }
 
-    public void Update(int id, MapMonsterModel mapMonster)
+    public async Task Update(int id, MapMonsterModel mapMonster)
     {
         mapMonster.Id = id;
-        var item = _minigameContext.MapMonsters.FirstOrDefault(s => s.Id == mapMonster.Id);
+        var item = await _minigameContext.MapMonsters.FirstOrDefaultAsync(s => s.Id == mapMonster.Id);
         if (item != null)
         {
             var x = _mapper.Map<MapMonsterModel, MapMonsterEntity>(mapMonster, item);
             _minigameContext.MapMonsters.Attach(item);
-            _minigameContext.SaveChanges();
+            await _minigameContext.SaveChangesAsync();
         }
     }
 
-    public void DecrementHealth(int mapMonsterId, int value)
+    public async Task DecrementHealth(int mapMonsterId, int value)
     {
-        var item = _minigameContext.MapMonsters.FirstOrDefault(s => s.Id == mapMonsterId);
+        var item = await _minigameContext.MapMonsters.FirstOrDefaultAsync(s => s.Id == mapMonsterId);
         if (item != null)
         {
             item.CurrentHealth = item.CurrentHealth - value;
             _minigameContext.MapMonsters.Attach(item);
-            _minigameContext.SaveChanges();
+            await _minigameContext.SaveChangesAsync();
         }
     }
 
-    public void Delete(int Id)
+    public async Task Delete(int Id)
     {
-        var item = _minigameContext.MapMonsters.FirstOrDefault(s => s.Id == Id);
+        var item = await _minigameContext.MapMonsters.FirstOrDefaultAsync(s => s.Id == Id);
         if (item != null)
         {
             _minigameContext.MapMonsters.Remove(item);
-            _minigameContext.SaveChanges();
+            await _minigameContext.SaveChangesAsync();
         }
     }
 }

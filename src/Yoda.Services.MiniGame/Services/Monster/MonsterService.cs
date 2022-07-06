@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Yoda.Services.MiniGame.Data;
 using Yoda.Services.MiniGame.Entities;
 using Yoda.Services.MiniGame.Models;
@@ -16,41 +17,41 @@ namespace Yoda.Services.MiniGame.Services.Monster
             _minigameContext = minigameContext;
         }
 
-        public MonsterModel GetMonsterById(int id)
+        public async Task<MonsterModel> GetMonsterById(int id)
         {
-            var item = _minigameContext.Monsters.FirstOrDefault(m => m.Id == id);
+            var item = await _minigameContext.Monsters.FirstOrDefaultAsync(m => m.Id == id);
             if (item == null)
                 return null;
             return _mapper.Map<MonsterModel>(item);
         }
 
-        public int Create(MonsterModel monster)
+        public async Task<int> Create(MonsterModel monster)
         {
             var item = _mapper.Map<MonsterEntity>(monster);
             _minigameContext.Monsters.Add(item);
-            _minigameContext.SaveChanges();
+            await _minigameContext.SaveChangesAsync();
             return item.Id;
         }
 
-        public void Update(int id, MonsterModel mon)
+        public async Task Update(int id, MonsterModel mon)
         {
             mon.Id = id;
-            var item = _minigameContext.Monsters.FirstOrDefault(u => u.Id == mon.Id);
+            var item = await _minigameContext.Monsters.FirstOrDefaultAsync(u => u.Id == mon.Id);
             if (item != null)
             {
                 var x = _mapper.Map<MonsterModel, MonsterEntity>(mon, item);
                 _minigameContext.Monsters.Attach(item);
-                _minigameContext.SaveChanges();
+                await _minigameContext.SaveChangesAsync();
             }
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            var item = _minigameContext.Monsters.FirstOrDefault(d => d.Id == id);
+            var item = await _minigameContext.Monsters.FirstOrDefaultAsync(d => d.Id == id);
             if (item != null)
             {
                 _minigameContext.Monsters.Remove(item);
-                _minigameContext.SaveChanges();
+                await _minigameContext.SaveChangesAsync();
             }
         }
     }

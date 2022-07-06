@@ -17,32 +17,32 @@ namespace Yoda.Services.MiniGame.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult Get([FromRoute] int id)
+        public async Task<IActionResult> Get([FromRoute] int id)
         {
-            var result = _monsterService.GetMonsterById(id);
+            var result = await _monsterService.GetMonsterById(id);
             if (result == null)
                 return NotFound();
             return Ok(result);
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] MonsterModel monster)
+        public async Task<IActionResult> Post([FromBody] MonsterModel monster)
         {
-            var result = _monsterService.Create(monster);
+            var result = await _monsterService.Create(monster);
             return Ok(result);
         }
 
         [HttpPut("{Id}")]
-        public IActionResult Put([FromRoute] int id, [FromBody] MonsterModel monster)
+        public async Task<IActionResult> Put([FromRoute] int id, [FromBody] MonsterModel monster)
         {
-            _monsterService.Update(id, monster);
+            await _monsterService.Update(id, monster);
             return Ok();
         }
 
         [HttpDelete("{Id}")]
-        public IActionResult Delete([FromRoute] int id)
+        public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            _monsterService.Delete(id);
+            await _monsterService.Delete(id);
             return NoContent();
         }
     }

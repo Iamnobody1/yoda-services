@@ -1,14 +1,12 @@
-using Yoda.Services.MiniGame.Entities;
 using Yoda.Services.MiniGame.Models;
 
 namespace Yoda.Services.MiniGame.Services.Monster
 {
     public interface IMonsterService
     {
-        MonsterModel GetMonsterById(int id);
-        int Create(MonsterModel monster);
-        void Update(int id, MonsterModel mon);
-        void Delete(int id);
-
+        Task<int> Create(MonsterModel monster);
+        Task Delete(int id);
+        Task<MonsterModel> GetMonsterById(int id);
+        Task Update(int id, MonsterModel mon);
     }
 }

@@ -1,11 +1,11 @@
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Yoda.Services.MiniGame.Data;
 using Yoda.Services.MiniGame.Entities;
 using Yoda.Services.MiniGame.Models;
 
 namespace Yoda.Services.MiniGame.Services.Map
 {
-
     public class MapService : IMapService
     {
         private readonly IMapper _mapper;
@@ -17,41 +17,41 @@ namespace Yoda.Services.MiniGame.Services.Map
             _minigameContext = minigameContext;
         }
 
-        public MapModel GetMapById(int id)
+        public async Task<MapModel> GetMapById(int id)
         {
-            var item = _minigameContext.Maps.FirstOrDefault(m => m.Id == id);
+            var item = await _minigameContext.Maps.FirstOrDefaultAsync(m => m.Id == id);
             if (item == null)
                 return null;
             return _mapper.Map<MapModel>(item);
         }
 
-        public int Create(MapModel Map)
+        public async Task<int> CreateAsync(MapModel Map)
         {
             var item = _mapper.Map<MapEntity>(Map);
-            _minigameContext.Maps.Add(item);
-            _minigameContext.SaveChanges();
+            await _minigameContext.Maps.AddAsync(item);
+            await _minigameContext.SaveChangesAsync();
             return item.Id;
         }
 
-        public void Update(int id, MapModel map)
+        public async Task Update(int id, MapModel map)
         {
             map.Id = id;
-            var item = _minigameContext.Maps.FirstOrDefault(u => u.Id == map.Id);
+            var item = await _minigameContext.Maps.FirstOrDefaultAsync(u => u.Id == map.Id);
             if (item != null)
             {
                 var x = _mapper.Map<MapModel, MapEntity>(map, item);
                 _minigameContext.Maps.Attach(item);
-                _minigameContext.SaveChanges();
+                await _minigameContext.SaveChangesAsync();
             }
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            var item = _minigameContext.Maps.FirstOrDefault(d => d.Id == id);
+            var item = await _minigameContext.Maps.FirstOrDefaultAsync(d => d.Id == id);
             if (item != null)
             {
                 _minigameContext.Maps.Remove(item);
-                _minigameContext.SaveChanges();
+                await _minigameContext.SaveChangesAsync();
             }
         }
     }

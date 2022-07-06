@@ -1,13 +1,12 @@
-using Yoda.Services.MiniGame.Entities;
 using Yoda.Services.MiniGame.Models;
 
 namespace Yoda.Services.MiniGame.Services.Map
 {
     public interface IMapService
     {
-        int Create(MapModel Map);
-        void Delete(int id);
-        MapModel GetMapById(int id);
-        void Update(int id, MapModel mon);
+        Task<int> CreateAsync(MapModel Map);
+        Task Delete(int id);
+        Task<MapModel> GetMapById(int id);
+        Task Update(int id, MapModel map);
     }
 }
