@@ -16,8 +16,8 @@ public class MapMonstersController : ControllerBase
         _mapMonsterService = mapMonsterService;
     }
 
-    [HttpGet("id")]
-    public IActionResult GetMonster([FromQuery] int id)
+    [HttpGet("{id}")]
+    public IActionResult GetMonster([FromRoute] int id)
     {
         var result = _mapMonsterService.GetMonster(id);
         if (result == null)
