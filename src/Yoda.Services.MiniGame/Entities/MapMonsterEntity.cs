@@ -1,5 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-
 namespace Yoda.Services.MiniGame.Entities;
 
 public class MapMonsterEntity

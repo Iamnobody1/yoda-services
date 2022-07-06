@@ -18,31 +18,12 @@ public class MapMonsterService : IMapMonsterService
 
     public IEnumerable<MapMonsterDetailModel> GetMonsters(int mapId)
     {
-        var data = _minigameContext.MapMonsters
-            .Where(x => x.MapId == mapId)
-            .Select(x => new MapMonsterDetailModel
-            {
-                Id = x.Id,
-                MapId = x.MapId,
-                MonsterId = x.MonsterId,
-                PositionX = x.PositionX,
-                PositionY = x.PositionY,
-                Facing = x.Facing,
-                CurrentHealth = x.CurrentHealth,
-                Monster = new MonsterModel
-                {
-                    Id = x.Monster.Id,
-                    Name = x.Monster.Name,
-                    Health = x.Monster.Health,
-                    Sprite = x.Monster.Sprite,
-                    Width = x.Monster.Width,
-                    Height = x.Monster.Height,
-                    RespawnTime = x.Monster.RespawnTime,
-                }
-            })
-            .ToList();
-
-        return data;
+        var item = _minigameContext.MapMonsters
+        .Where(m => m.Id == mapId)
+        .ToList();
+        if (item == null)
+            return null;
+        return _mapper.Map<IEnumerable<MapMonsterDetailModel>>(item);
     }
 
     public int Create(MapMonsterModel mapMonster)
