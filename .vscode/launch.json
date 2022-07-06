@@ -9,9 +9,9 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      "program": "${workspaceFolder}/src/Yoda.Services/bin/Debug/net6.0/Yoda.Services.dll",
+      "program": "${workspaceFolder}/src/Yoda.Services.MiniGame/bin/Debug/net6.0/Yoda.Services.MiniGame.dll",
       "args": [],
-      "cwd": "${workspaceFolder}/src/Yoda.Services",
+      "cwd": "${workspaceFolder}/src/Yoda.Services.MiniGame",
       "stopAtEntry": false,
       "serverReadyAction": {
         "action": "openExternally",
