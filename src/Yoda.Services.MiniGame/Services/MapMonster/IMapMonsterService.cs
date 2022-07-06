@@ -7,7 +7,7 @@ public interface IMapMonsterService
 {
     IEnumerable<MapMonsterDetailModel> GetMonsters(int mapId);
     int Create(MapMonsterModel mapMonster);
-    void Update(int mapMonsterId, MapMonsterEntity newMapMonter);
+    void Update(int mapMonsterId, MapMonsterModel newMapMonter);
     void DecrementHealth(int mapMonsterId, int value);
     void Delete(int mapMonsterId);
 }

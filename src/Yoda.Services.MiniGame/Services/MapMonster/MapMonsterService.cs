@@ -54,18 +54,14 @@ public class MapMonsterService : IMapMonsterService
         return item.Id;
     }
 
-    public void Update(int mapMonsterId, MapMonsterEntity newMapMonter)
+    public void Update(int id, MapMonsterModel mapMonster)
     {
-        var item = _minigameContext.MapMonsters.FirstOrDefault(s => s.Id == mapMonsterId);
+        mapMonster.Id = id;
+        var item = _minigameContext.MapMonsters.FirstOrDefault(s => s.Id == mapMonster.Id);
         if (item != null)
         {
-            item.MapId = newMapMonter.MapId;
-            item.MonsterId = newMapMonter.MonsterId;
-            item.PositionX = newMapMonter.PositionX;
-            item.PositionY = newMapMonter.PositionY;
-            item.Facing = newMapMonter.Facing;
-            item.CurrentHealth = newMapMonter.CurrentHealth;
-            _minigameContext.MapMonsters.Update(item);
+            var x = _mapper.Map<MapMonsterModel, MapMonsterEntity>(mapMonster, item);
+            _minigameContext.MapMonsters.Attach(item);
             _minigameContext.SaveChanges();
         }
     }

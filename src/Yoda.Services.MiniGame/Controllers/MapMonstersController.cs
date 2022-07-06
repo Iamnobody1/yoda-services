@@ -33,7 +33,7 @@ public class MapMonstersController : ControllerBase
     }
 
     [HttpPut("{mapMonsterId}")]
-    public IActionResult Put([FromRoute] int mapMonsterId, [FromBody] MapMonsterEntity mapMonster)
+    public IActionResult Put([FromRoute] int mapMonsterId, [FromBody] MapMonsterModel mapMonster)
     {
         _mapMonsterService.Update(mapMonsterId, mapMonster);
         return Ok();
