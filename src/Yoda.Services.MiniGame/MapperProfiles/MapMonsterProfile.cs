@@ -9,8 +9,9 @@ public class MapMonsterProfile : Profile
     public MapMonsterProfile()
     {
         CreateMap<MapMonsterModel, MapMonsterEntity>()
-        .ReverseMap();
-        CreateMap<MapMonsterEntity, MapMonsterDetailModel>().IncludeMembers(s => s.Monster)
-        .ForMember(dest => dest.Monster, opt => opt.MapFrom(src => src.Monster));
+            .ReverseMap();
+
+        CreateMap<MapMonsterEntity, MapMonsterDetailModel>()
+            .ForMember(dest => dest.Monster, opt => opt.MapFrom(src => src.Monster));
     }
 }

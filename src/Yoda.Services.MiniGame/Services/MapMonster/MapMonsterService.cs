@@ -1,4 +1,6 @@
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
 using Yoda.Services.MiniGame.Data;
 using Yoda.Services.MiniGame.Entities;
 using Yoda.Services.MiniGame.Models;
@@ -16,11 +18,24 @@ public class MapMonsterService : IMapMonsterService
         _minigameContext = minigameContext;
     }
 
+    public MapMonsterDetailModel GetMonster(int mapMonsterId)
+    {
+        var item = _minigameContext.MapMonsters
+            .AsNoTracking()
+            .ProjectTo<MapMonsterDetailModel>(_mapper.ConfigurationProvider)
+            .FirstOrDefault(m => m.Id == mapMonsterId);
+
+        if (item == null)
+            return null;
+        return null;
+    }
+
     public IEnumerable<MapMonsterDetailModel> GetMonsters(int mapId)
     {
         var item = _minigameContext.MapMonsters
-        .Where(m => m.Id == mapId)
-        .ToList();
+            .Where(m => m.Id == mapId)
+            .ToList();
+
         if (item == null)
             return null;
         return _mapper.Map<IEnumerable<MapMonsterDetailModel>>(item);

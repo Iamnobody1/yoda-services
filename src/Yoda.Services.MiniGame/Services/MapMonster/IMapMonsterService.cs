@@ -1,14 +1,13 @@
-using Yoda.Services.MiniGame.Entities;
 using Yoda.Services.MiniGame.Models;
 
 namespace Yoda.Services.MiniGame.Services.MapMonster;
 
 public interface IMapMonsterService
 {
-    IEnumerable<MapMonsterDetailModel> GetMonsters(int mapId);
     int Create(MapMonsterModel mapMonster);
-    void Update(int mapMonsterId, MapMonsterModel newMapMonter);
     void DecrementHealth(int mapMonsterId, int value);
-    void Delete(int mapMonsterId);
+    void Delete(int Id);
+    MapMonsterDetailModel GetMonster(int mapMonsterId);
+    IEnumerable<MapMonsterDetailModel> GetMonsters(int mapId);
+    void Update(int id, MapMonsterModel mapMonster);
 }
-

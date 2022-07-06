@@ -16,19 +16,28 @@ public class MapMonstersController : ControllerBase
         _mapMonsterService = mapMonsterService;
     }
 
-    [HttpPost]
-    public IActionResult Post([FromBody] MapMonsterModel mapMonster)
+    [HttpGet("id")]
+    public IActionResult GetMonster([FromQuery] int id)
     {
-        var result = _mapMonsterService.Create(mapMonster);
+        var result = _mapMonsterService.GetMonster(id);
+        if (result == null)
+            return NotFound();
         return Ok(result);
     }
 
     [HttpGet]
-    public IActionResult Get([FromQuery] int mapId)
+    public IActionResult GetMonsters([FromQuery] int mapId)
     {
         var result = _mapMonsterService.GetMonsters(mapId);
         if (result == null || !result.Any())
             return NotFound();
+        return Ok(result);
+    }
+
+    [HttpPost]
+    public IActionResult Post([FromBody] MapMonsterModel mapMonster)
+    {
+        var result = _mapMonsterService.Create(mapMonster);
         return Ok(result);
     }
 
