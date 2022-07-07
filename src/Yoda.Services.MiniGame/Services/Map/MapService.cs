@@ -17,9 +17,9 @@ public class MapService : IMapService
         _minigameContext = minigameContext;
     }
 
-    public async Task<MapModel> GetMapById(int id)
+    public async Task<MapModel> GetMapById(int mapId)
     {
-        var item = await _minigameContext.Maps.FirstOrDefaultAsync(m => m.Id == id);
+        var item = await _minigameContext.Maps.FirstOrDefaultAsync(m => m.Id == mapId);
         if (item == null)
             return null;
         return _mapper.Map<MapModel>(item);
@@ -33,9 +33,9 @@ public class MapService : IMapService
         return item.Id;
     }
 
-    public async Task Update(int id, MapModel map)
+    public async Task Update(int mapId, MapModel map)
     {
-        map.Id = id;
+        map.Id = mapId;
         var item = await _minigameContext.Maps.FirstOrDefaultAsync(u => u.Id == map.Id);
         if (item != null)
         {
@@ -45,9 +45,9 @@ public class MapService : IMapService
         }
     }
 
-    public async Task Delete(int id)
+    public async Task Delete(int mapId)
     {
-        var item = await _minigameContext.Maps.FirstOrDefaultAsync(d => d.Id == id);
+        var item = await _minigameContext.Maps.FirstOrDefaultAsync(d => d.Id == mapId);
         if (item != null)
         {
             _minigameContext.Maps.Remove(item);

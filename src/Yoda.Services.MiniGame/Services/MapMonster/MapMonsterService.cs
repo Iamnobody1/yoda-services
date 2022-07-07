@@ -18,22 +18,22 @@ public class MapMonsterService : IMapMonsterService
         _minigameContext = minigameContext;
     }
 
-    public async Task<MapMonsterDetailModel> GetMonster(int id)
+    public async Task<MapMonsterDetailModel> GetMonster(int mapMonsterId)
     {
         var item = await _minigameContext.MapMonsters
             .AsNoTracking()
             .ProjectTo<MapMonsterDetailModel>(_mapper.ConfigurationProvider)
-            .FirstOrDefaultAsync(m => m.Id == id);
+            .FirstOrDefaultAsync(m => m.Id == mapMonsterId);
 
         if (item == null)
             return null;
         return item;
     }
 
-    public async Task<IEnumerable<MapMonsterDetailModel>> GetMonsters(int id)
+    public async Task<IEnumerable<MapMonsterDetailModel>> GetMonsters(int mapMonsterId)
     {
         var item = await _minigameContext.MapMonsters
-            .Where(m => m.Id == id)
+            .Where(m => m.Id == mapMonsterId)
             .ToListAsync();
 
         if (item == null)
@@ -50,9 +50,9 @@ public class MapMonsterService : IMapMonsterService
         return item.Id;
     }
 
-    public async Task Update(int id, MapMonsterModel mapMonster)
+    public async Task Update(int mapMonsterId, MapMonsterModel mapMonster)
     {
-        mapMonster.Id = id;
+        mapMonster.Id = mapMonsterId;
         var item = await _minigameContext.MapMonsters.FirstOrDefaultAsync(s => s.Id == mapMonster.Id);
         if (item != null)
         {
@@ -62,9 +62,9 @@ public class MapMonsterService : IMapMonsterService
         }
     }
 
-    public async Task DecrementHealth(int id, int value)
+    public async Task DecrementHealth(int mapMonsterId, int value)
     {
-        var item = await _minigameContext.MapMonsters.FirstOrDefaultAsync(s => s.Id == id);
+        var item = await _minigameContext.MapMonsters.FirstOrDefaultAsync(s => s.Id == mapMonsterId);
         if (item != null)
         {
             item.CurrentHealth = item.CurrentHealth - value;
@@ -73,9 +73,9 @@ public class MapMonsterService : IMapMonsterService
         }
     }
 
-    public async Task Delete(int Id)
+    public async Task Delete(int mapMonsterId)
     {
-        var item = await _minigameContext.MapMonsters.FirstOrDefaultAsync(s => s.Id == Id);
+        var item = await _minigameContext.MapMonsters.FirstOrDefaultAsync(s => s.Id == mapMonsterId);
         if (item != null)
         {
             _minigameContext.MapMonsters.Remove(item);
