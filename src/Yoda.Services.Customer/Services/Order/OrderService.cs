@@ -30,9 +30,9 @@ public class OrderService : IOrderService
         return items;
     }
 
-    public OrderModel GetById(int orderId)
+    public OrderModel GetById(int id)
     {
-        var item = _yodaContext.Orders.FirstOrDefault(x => x.Id == orderId);
+        var item = _yodaContext.Orders.FirstOrDefault(x => x.Id == id);
         if (item == null)
             return null;
         return new OrderModel()
@@ -67,28 +67,28 @@ public class OrderService : IOrderService
             });
     }
 
-    public int Create(OrderModel newOrder)
+    public int Create(OrderModel order)
     {
-        var item = _mapper.Map<OrderEntity>(newOrder);
+        var item = _mapper.Map<OrderEntity>(order);
         _yodaContext.Orders.Add(item);
         _yodaContext.SaveChanges();
         return item.Id;
     }
 
-    public void Update(int orderId, OrderEntity newOrder)
+    public void Update(int orderId, OrderEntity order)
     {
-        var order = _yodaContext.Orders.FirstOrDefault(s => s.Id == orderId);
-        if (order != null)
+        var item = _yodaContext.Orders.FirstOrDefault(s => s.Id == orderId);
+        if (item != null)
         {
-            order.CustomerId = newOrder.CustomerId;
-            _yodaContext.Orders.Update(order);
+            item.CustomerId = item.CustomerId;
+            _yodaContext.Orders.Update(item);
             _yodaContext.SaveChanges();
         }
     }
 
-    public void Delete(int orderId)
+    public void Delete(int id)
     {
-        var order = _yodaContext.Orders.FirstOrDefault(s => s.Id == orderId);
+        var order = _yodaContext.Orders.FirstOrDefault(s => s.Id == id);
         if (order != null)
         {
             _yodaContext.Orders.Remove(order);

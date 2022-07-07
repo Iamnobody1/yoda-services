@@ -25,9 +25,9 @@ public class CustomersController : ControllerBase
     }
 
     [HttpGet("{customerId}")]
-    public IActionResult Get([FromRoute] int customerId)
+    public IActionResult Get([FromRoute] int id)
     {
-        var result = CustomerService.GetById(customerId);
+        var result = CustomerService.GetById(id);
         if (result == null)
             return NotFound();
         return Ok(result);
@@ -41,16 +41,16 @@ public class CustomersController : ControllerBase
     }
 
     [HttpPut("{customerId}")]
-    public IActionResult Put([FromRoute] int customerId, [FromBody] CustomerEntity customer)
+    public IActionResult Put([FromRoute] int id, [FromBody] CustomerEntity customer)
     {
-        CustomerService.Update(customerId, customer);
+        CustomerService.Update(id, customer);
         return Ok();
     }
 
     [HttpDelete("{customerId}")]
-    public IActionResult Delete([FromRoute] int customerId)
+    public IActionResult Delete([FromRoute] int id)
     {
-        CustomerService.Delete(customerId);
+        CustomerService.Delete(id);
         return NoContent();
     }
 }

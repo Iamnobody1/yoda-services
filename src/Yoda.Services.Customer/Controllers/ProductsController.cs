@@ -25,9 +25,9 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet("{productId}")]
-    public IActionResult Get([FromRoute] int productId)
+    public IActionResult Get([FromRoute] int id)
     {
-        var item = _productService.GetById(productId);
+        var item = _productService.GetById(id);
         if (item == null)
             return NotFound();
         return Ok(item);
@@ -41,9 +41,9 @@ public class ProductsController : ControllerBase
     }
 
     [HttpPut("{productId}")]
-    public IActionResult Put([FromRoute] int productId, [FromBody] ProductModel product)
+    public IActionResult Put([FromRoute] int id, [FromBody] ProductModel product)
     {
-        _productService.Update(productId, product);
+        _productService.Update(id, product);
         return Ok();
     }
 

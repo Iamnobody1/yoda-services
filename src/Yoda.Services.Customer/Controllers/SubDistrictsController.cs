@@ -15,9 +15,9 @@ public class SubDistrictsController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult Get([FromQuery] int provinceId)
+    public IActionResult Get([FromQuery] int id)
     {
-        var result = _subDistrictService.GetList(provinceId);
+        var result = _subDistrictService.GetList(id);
         if (result == null)
             return NotFound();
         return Ok(result);

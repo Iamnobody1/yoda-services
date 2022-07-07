@@ -15,9 +15,9 @@ public class DistrictsController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult Get([FromQuery] int provinceId)
+    public IActionResult Get([FromQuery] int id)
     {
-        var result = _districtService.GetList(provinceId);
+        var result = _districtService.GetList(id);
         if (result == null)
             return NotFound();
         return Ok(result);

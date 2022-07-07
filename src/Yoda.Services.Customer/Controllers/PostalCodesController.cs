@@ -13,6 +13,7 @@ namespace Yoda.Services.Customer.Controllers
         {
             _postalService = postalService;
         }
+
         [HttpGet]
         public IActionResult GetList([FromQuery] int id)
         {

@@ -26,9 +26,9 @@ public class OrdersController : ControllerBase
     }
 
     [HttpGet("{orderId}")]
-    public IActionResult Get([FromRoute] int orderId)
+    public IActionResult Get([FromRoute] int id)
     {
-        var result = OrderService.GetById(orderId);
+        var result = OrderService.GetById(id);
         if (result == null)
             return NotFound();
         return Ok(result);
@@ -42,16 +42,16 @@ public class OrdersController : ControllerBase
     }
 
     [HttpPut("{orderId}")]
-    public IActionResult Put([FromRoute] int orderId, [FromBody] OrderEntity order)
+    public IActionResult Put([FromRoute] int id, [FromBody] OrderEntity order)
     {
-        OrderService.Update(orderId, order);
+        OrderService.Update(id, order);
         return Ok();
     }
 
     [HttpDelete("{orderId}")]
-    public IActionResult Delete([FromRoute] int orderId)
+    public IActionResult Delete([FromRoute] int id)
     {
-        OrderService.Delete(orderId);
+        OrderService.Delete(id);
         return NoContent();
     }
 }

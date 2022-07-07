@@ -42,12 +42,12 @@ namespace Yoda.Services.Customer.Services.Customer
             return item;
         }
 
-        public void Update(int id, CustomerEntity cus)
+        public void Update(int id, CustomerEntity customer)
         {
             var item = _yodaContext.Customers.FirstOrDefault(c => c.Id == id);
             if (item != null)
             {
-                item.Name = cus.Name;
+                item.Name = customer.Name;
                 _yodaContext.SaveChanges();
             }
         }

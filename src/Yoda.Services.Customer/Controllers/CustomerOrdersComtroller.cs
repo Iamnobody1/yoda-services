@@ -15,9 +15,9 @@ public class CustomerOrdersController : ControllerBase
     }
 
     [HttpGet("{customerId}")]
-    public IActionResult Get([FromRoute] int customerId)
+    public IActionResult Get([FromRoute] int id)
     {
-        var result = _orderservice.GetOrdersOfCustomer(customerId);
+        var result = _orderservice.GetOrdersOfCustomer(id);
         if (result == null)
             return NotFound();
         return Ok(result);

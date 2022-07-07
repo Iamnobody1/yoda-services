@@ -23,6 +23,7 @@ namespace Yoda.Services.Customer.Controllers
                 return NotFound();
             return Ok(result);
         }
+
         [HttpGet("")]
         public IActionResult GetList([FromQuery] int start, [FromQuery] int length)
         {
@@ -38,12 +39,14 @@ namespace Yoda.Services.Customer.Controllers
             var result = _orderDetailsService.Create(orderdetails);
             return Ok(result);
         }
+
         [HttpPut("{Id}")]
         public IActionResult Put([FromRoute] int id, [FromBody] OrderDetailModel orderdetail)
         {
             _orderDetailsService.Update(id, orderdetail);
             return Ok();
         }
+
         [HttpDelete("{Id}")]
         public IActionResult Delete([FromRoute] int id)
         {

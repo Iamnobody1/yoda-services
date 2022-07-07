@@ -13,10 +13,11 @@ public class ProvincesController : ControllerBase
     {
         ProvinceService = provinceService;
     }
+
     [HttpGet]
-    public IActionResult Get([FromQuery] int countryId)
+    public IActionResult Get([FromQuery] int id)
     {
-        var result = ProvinceService.GetList(countryId);
+        var result = ProvinceService.GetList(id);
         if (result == null)
             return NotFound();
         return Ok(result);
