@@ -25,7 +25,7 @@ namespace Yoda.Services.MiniGame.Services.Map
             return _mapper.Map<MapModel>(item);
         }
 
-        public async Task<int> CreateAsync(MapModel Map)
+        public async Task<int> Create(MapModel Map)
         {
             var item = _mapper.Map<MapEntity>(Map);
             await _minigameContext.Maps.AddAsync(item);

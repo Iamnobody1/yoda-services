@@ -7,7 +7,8 @@ namespace Yoda.Services.MiniGame.Models
     {
         public MonsterProfile()
         {
-            CreateMap<MonsterModel, MonsterEntity>().ReverseMap();
+            CreateMap<MonsterModel, MonsterEntity>()
+                .ReverseMap();
         }
     }
 }

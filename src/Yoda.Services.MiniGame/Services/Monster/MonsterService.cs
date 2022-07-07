@@ -17,9 +17,9 @@ namespace Yoda.Services.MiniGame.Services.Monster
             _minigameContext = minigameContext;
         }
 
-        public async Task<MonsterModel> GetMonsterById(int id)
+        public async Task<MonsterModel> GetMonsterById(int monsterId)
         {
-            var item = await _minigameContext.Monsters.FirstOrDefaultAsync(m => m.Id == id);
+            var item = await _minigameContext.Monsters.FirstOrDefaultAsync(m => m.Id == monsterId);
             if (item == null)
                 return null;
             return _mapper.Map<MonsterModel>(item);
@@ -33,21 +33,21 @@ namespace Yoda.Services.MiniGame.Services.Monster
             return item.Id;
         }
 
-        public async Task Update(int id, MonsterModel mon)
+        public async Task Update(int monsterId, MonsterModel monster)
         {
-            mon.Id = id;
-            var item = await _minigameContext.Monsters.FirstOrDefaultAsync(u => u.Id == mon.Id);
+            monster.Id = monsterId;
+            var item = await _minigameContext.Monsters.FirstOrDefaultAsync(u => u.Id == monster.Id);
             if (item != null)
             {
-                var x = _mapper.Map<MonsterModel, MonsterEntity>(mon, item);
+                var x = _mapper.Map<MonsterModel, MonsterEntity>(monster, item);
                 _minigameContext.Monsters.Attach(item);
                 await _minigameContext.SaveChangesAsync();
             }
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(int monsterId)
         {
-            var item = await _minigameContext.Monsters.FirstOrDefaultAsync(d => d.Id == id);
+            var item = await _minigameContext.Monsters.FirstOrDefaultAsync(d => d.Id == monsterId);
             if (item != null)
             {
                 _minigameContext.Monsters.Remove(item);

@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Yoda.Services.MiniGame.Entities;
 using Yoda.Services.MiniGame.Models;
 using Yoda.Services.MiniGame.Services.Map;
 
@@ -28,7 +27,7 @@ public class MapsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] MapModel map)
     {
-        var result = await _mapService.CreateAsync(map);
+        var result = await _mapService.Create(map);
         return Ok(result);
     }
 
@@ -38,7 +37,6 @@ public class MapsController : ControllerBase
         await _mapService.Update(mapId, mapMonster);
         return Ok();
     }
-
 
     [HttpDelete("{mapId}")]
     public async Task<IActionResult> Delete([FromRoute] int mapId)

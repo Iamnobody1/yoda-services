@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Yoda.Services.MiniGame.Entities;
 using Yoda.Services.MiniGame.Models;
 using Yoda.Services.MiniGame.Services.MapMonster;
 
@@ -17,21 +16,19 @@ public class MapMonstersController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetMonsterAsync([FromRoute] int id)
+    public async Task<IActionResult> GetMonster([FromRoute] int mapMonsterId)
     {
-        var result = await _mapMonsterService.GetMonster(id);
+        var result = await _mapMonsterService.GetMonster(mapMonsterId);
         if (result == null)
             return NotFound();
         return Ok(result);
     }
 
     [HttpGet]
-
     public async Task<IActionResult> GetMonsters([FromQuery] int mapId)
     {
         var result = await _mapMonsterService.GetMonsters(mapId);
         if (result == null || !result.Any())
-
             return NotFound();
         return Ok(result);
     }
