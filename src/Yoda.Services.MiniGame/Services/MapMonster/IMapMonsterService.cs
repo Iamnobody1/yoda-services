@@ -6,8 +6,8 @@ public interface IMapMonsterService
 {
     Task<int> Create(MapMonsterModel mapMonster);
     Task DecrementHealth(int mapMonsterId, int value);
-    Task Delete(int Id);
+    Task Delete(int mapMonsterId);
     Task<MapMonsterDetailModel> GetMonster(int mapMonsterId);
     Task<IEnumerable<MapMonsterDetailModel>> GetMonsters(int mapId);
-    Task Update(int id, MapMonsterModel mapMonster);
+    Task Update(int mapMonsterId, MapMonsterModel mapMonster);
 }
