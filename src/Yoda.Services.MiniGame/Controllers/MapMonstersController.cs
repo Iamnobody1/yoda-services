@@ -16,18 +16,18 @@ public class MapMonstersController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetMonster([FromRoute] int mapMonsterId)
+    public async Task<IActionResult> GetMonster([FromRoute] int id)
     {
-        var result = await _mapMonsterService.GetMonster(mapMonsterId);
+        var result = await _mapMonsterService.GetMonster(id);
         if (result == null)
             return NotFound();
         return Ok(result);
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetMonsters([FromQuery] int mapId)
+    public async Task<IActionResult> GetMonsters([FromQuery] int id)
     {
-        var result = await _mapMonsterService.GetMonsters(mapId);
+        var result = await _mapMonsterService.GetMonsters(id);
         if (result == null || !result.Any())
             return NotFound();
         return Ok(result);
@@ -41,23 +41,23 @@ public class MapMonstersController : ControllerBase
     }
 
     [HttpPut("{mapMonsterId}")]
-    public async Task<IActionResult> Put([FromRoute] int mapMonsterId, [FromBody] MapMonsterModel mapMonster)
+    public async Task<IActionResult> Put([FromRoute] int id, [FromBody] MapMonsterModel mapMonster)
     {
-        await _mapMonsterService.Update(mapMonsterId, mapMonster);
+        await _mapMonsterService.Update(id, mapMonster);
         return Ok();
     }
 
     [HttpPut("{mapMonsterId}/decrement-health")]
-    public async Task<IActionResult> DecrementHealth([FromRoute] int mapMonsterId, [FromQuery] int value)
+    public async Task<IActionResult> DecrementHealth([FromRoute] int id, [FromQuery] int value)
     {
-        await _mapMonsterService.DecrementHealth(mapMonsterId, value);
+        await _mapMonsterService.DecrementHealth(id, value);
         return Ok();
     }
 
     [HttpDelete("{mapMonsterId}")]
-    public async Task<IActionResult> Delete([FromRoute] int mapMonsterId)
+    public async Task<IActionResult> Delete([FromRoute] int id)
     {
-        await _mapMonsterService.Delete(mapMonsterId);
+        await _mapMonsterService.Delete(id);
         return NoContent();
     }
 }

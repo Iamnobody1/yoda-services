@@ -18,22 +18,22 @@ public class MapMonsterService : IMapMonsterService
         _minigameContext = minigameContext;
     }
 
-    public async Task<MapMonsterDetailModel> GetMonster(int mapMonsterId)
+    public async Task<MapMonsterDetailModel> GetMonster(int id)
     {
         var item = await _minigameContext.MapMonsters
             .AsNoTracking()
             .ProjectTo<MapMonsterDetailModel>(_mapper.ConfigurationProvider)
-            .FirstOrDefaultAsync(m => m.Id == mapMonsterId);
+            .FirstOrDefaultAsync(m => m.Id == id);
 
         if (item == null)
             return null;
         return item;
     }
 
-    public async Task<IEnumerable<MapMonsterDetailModel>> GetMonsters(int mapId)
+    public async Task<IEnumerable<MapMonsterDetailModel>> GetMonsters(int id)
     {
         var item = await _minigameContext.MapMonsters
-            .Where(m => m.Id == mapId)
+            .Where(m => m.Id == id)
             .ToListAsync();
 
         if (item == null)
@@ -62,9 +62,9 @@ public class MapMonsterService : IMapMonsterService
         }
     }
 
-    public async Task DecrementHealth(int mapMonsterId, int value)
+    public async Task DecrementHealth(int id, int value)
     {
-        var item = await _minigameContext.MapMonsters.FirstOrDefaultAsync(s => s.Id == mapMonsterId);
+        var item = await _minigameContext.MapMonsters.FirstOrDefaultAsync(s => s.Id == id);
         if (item != null)
         {
             item.CurrentHealth = item.CurrentHealth - value;
